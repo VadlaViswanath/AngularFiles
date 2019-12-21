@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<style>
+	.div{
+		
+		height:200px;
+	}
+	</style>
+</head>
+<body>
+
+	<div class="div">h1wdfghj</div>
+	<h1 id="id"></h1>
+
+
+<script>
+//$(document).ready(function(){
+//	$("div").css("width","300px").append("plain text").css("background-color","lightgreen");
+//});
+
+
+var s= document.createElement("script");
+s.text=`(()=>{alert('am in')})()`;
+document.getElementsByTagName("h1")[0].appendChild(s);
+
+
+</script>
+</body>
+</html>	

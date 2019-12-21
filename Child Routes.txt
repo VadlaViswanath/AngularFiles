@@ -1,0 +1,99 @@
+app.component.html
+=======================
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <a class="navbar-brand" routerLink="home">Navbar</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-item nav-link active" routerLink="home">Home</a>
+                  <a class="nav-item nav-link" routerLink="about">About</a>
+                  <a class="nav-item nav-link" routerLink="departments">Departments</a>
+                  <a class="nav-item nav-link" routerLink="contact">Contact</a>
+                  <a class="nav-item nav-link" routerLink="electronics">Electronics</a>
+                  <a class="nav-item nav-link" routerLink="fashion">Fashion</a>
+                  
+                </div>
+              </div>
+ </nav>
+
+app-routing.module.ts
+==========================
+
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { ProductsComponent } from './products/products.component';
+import { ElectronicsComponent } from './electronics/electronics.component';
+import { FashionComponent } from './fashion/fashion.component';
+import { MobilesComponent } from './mobiles/mobiles.component';
+import { LaptopsComponent } from './laptops/laptops.component';
+import { MenComponent } from './men/men.component';
+import { WomenComponent } from './women/women.component';
+import { DepartmentsComponent } from './departments/departments.component';
+import { DepartmentListComponent } from './department-list/department-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+
+const routes: Routes = [
+  {path:"home",component:HomeComponent},
+  {path:"",component:HomeComponent},
+  {path:"about",component:AboutComponent},
+  {path:"contact",component:ContactComponent},
+  {path:"departments",component:DepartmentsComponent},
+  {path:"departments/:id",component:DepartmentListComponent},
+  {path:"products/:brandName",component:ProductsComponent},
+  {path:"electronics",component:ElectronicsComponent,children:[
+    {path:"mobiles",component:MobilesComponent},
+    {path:"laptops",component:LaptopsComponent},
+  ]},
+  {path:"fashion",component:FashionComponent,children:[
+    {path:"men",component:MenComponent},
+    {path:"women",component:WomenComponent},
+   ]},
+   {path:"**",component:PageNotFoundComponent}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+electronics.component.html
+==================================
+
+<nav class="navbar navbar-expand-sm navbar-light">
+<div class="navbar-nav">
+    <a class="nav-item nav-link active" routerLink="mobiles">Mobiles</a>
+    <a class="nav-item nav-link" routerLink="laptops">Laptops</a>
+    <!-- <a class="nav-item nav-link" routerLink="contact">Contact</a>
+    <a class="nav-item nav-link" routerLink="electronics">Electronics</a>
+    <a class="nav-item nav-link" routerLink="fashion">Fashion</a> -->
+  </div>
+</nav>
+  <router-outlet></router-outlet>
+
+
+
+
+
+fastion.component.html
+===============================
+
+<nav class="navbar navbar-expand-sm navbar-light">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link active" routerLink="men">Men</a>
+        <a class="nav-item nav-link" routerLink="women">Women</a>
+        <!-- <a class="nav-item nav-link" routerLink="contact">Contact</a>
+        <a class="nav-item nav-link" routerLink="electronics">Electronics</a>
+        <a class="nav-item nav-link" routerLink="fashion">Fashion</a> -->
+      </div>
+    </nav>
+      <router-outlet></router-outlet>
+    

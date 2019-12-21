@@ -1,0 +1,61 @@
+app.component.ts
+=======================
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Task3';
+
+  imageURL='';
+  showPreview(e){
+    let file = e.target.files[0];
+     if (file) {
+      
+        let reader = new FileReader();
+         reader.onload = (e: any) => {
+          this.imageURL=(e.target.result);
+        }
+        reader.readAsDataURL(file);
+     }
+    
+    
+
+  }
+}
+
+app.component.html
+=======================
+
+
+<div class="container-fluid align border border-danger">
+  <h6>3) Upload photo and show the uploaded photo in image in angular form </h6>
+
+<form >
+
+        <input type="file"  (change)="showPreview($event)" />
+
+        <div  *ngIf="imageURL !== ''">
+
+                <img [src]="imageURL" >
+               
+             
+        </div>
+</form>
+</div>
+
+
+
+app.component.css
+=======================
+
+.align{
+    align-content: center;
+    padding:5%;
+    text-align: center;
+
+}

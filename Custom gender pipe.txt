@@ -1,0 +1,63 @@
+emp-title.pipe.ts
+=======================
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'empTitle'
+})
+export class EmpTitlePipe implements PipeTransform {
+
+  transform(value: any, gender:string): any {
+    if(gender.toLowerCase()=='male'){
+      return 'Mr.' + value;
+    } else {
+      return 'Miss.' + value;
+    }
+  }
+
+}
+
+
+employe-list.component.html
+===============================
+
+<h3>employee-list works!</h3>
+
+<table class="table table-bordered table-striped col-sm-8">
+    <thead>
+        <tr>
+            <th>EmpCode</th>
+            <th>Employee Name</th>
+            <th>Gender</th>
+            <th>Annual Salary</th>
+            <th>DateOfBirth</th>
+            <th>Index</th>
+            <!-- <th>Even</th>
+            <th>Odd</th> -->
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let employe of employee; let i=index;let isEven=even;let isOdd=odd">
+            <td>{{employe.code | uppercase}}</td>
+            <td>{{employe.name | empTitle:employe.gender}}</td>
+            <td>{{employe.gender}}</td>
+            <td>{{employe.annualSalary | currency:'INR':true:'1.0'}}</td>
+            <td>{{employe.dateOfBirth | date:'fullDate'}}</td>
+            <td>{{i}}</td>
+           
+            <!-- <td>{{isEven}}</td>
+            <td>{{isOdd}}</td> -->
+        </tr>
+
+        <tr *ngIf="!employee || employee.length==0">
+            <td colspan="5">
+                No Recards to display
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+

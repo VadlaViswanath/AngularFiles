@@ -1,0 +1,168 @@
+app-routing.module.ts
+===========================
+
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { ProductsComponent } from './products/products.component';
+import { ElectronicsComponent } from './electronics/electronics.component';
+import { FashionComponent } from './fashion/fashion.component';
+import { MobilesComponent } from './mobiles/mobiles.component';
+import { LaptopsComponent } from './laptops/laptops.component';
+import { MenComponent } from './men/men.component';
+import { WomenComponent } from './women/women.component';
+import { DepartmentsComponent } from './departments/departments.component';
+import { DepartmentListComponent } from './department-list/department-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+
+const routes: Routes = [
+  {path:"home",component:HomeComponent},
+  {path:"",component:HomeComponent},
+  {path:"about",component:AboutComponent},
+  {path:"contact",component:ContactComponent},
+  {path:"departments",component:DepartmentsComponent},
+  {path:"departments/:id",component:DepartmentListComponent},
+  {path:"products/:brandName",component:ProductsComponent},
+  {path:"electronics",component:ElectronicsComponent,children:[
+    {path:"mobiles",component:MobilesComponent},
+    {path:"laptops",component:LaptopsComponent},
+  ]},
+  {path:"fashion",component:FashionComponent,children:[
+    {path:"men",component:MenComponent},
+    {path:"women",component:WomenComponent},
+   ]},
+   {path:"**",component:PageNotFoundComponent}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+
+
+app.component.html
+===========================
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <a class="navbar-brand" routerLink="home">Navbar</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-item nav-link active" routerLink="home">Home</a>
+                  <a class="nav-item nav-link" routerLink="about">About</a>
+                  <a class="nav-item nav-link" routerLink="departments">Departments</a>
+                  <a class="nav-item nav-link" routerLink="contact">Contact</a>
+                  <a class="nav-item nav-link" routerLink="electronics">Electronics</a>
+                  <a class="nav-item nav-link" routerLink="fashion">Fashion</a>
+                  
+                </div>
+              </div>
+ </nav>
+
+
+
+
+
+departments-list.component.ts
+===============================
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+
+@Component({
+  selector: 'app-department-list',
+  templateUrl: './department-list.component.html',
+  styleUrls: ['./department-list.component.css']
+})
+export class DepartmentListComponent implements OnInit {
+
+  constructor(private route:ActivatedRoute,private router:Router) { }
+
+  departmentId:number;
+
+  ngOnInit() {
+    // let id =  parseInt(this.route.snapshot.paramMap.get('id'));
+    // this.departmentId = id;
+
+    this.route.paramMap.subscribe( (params:ParamMap)=>{
+      let id = parseInt(params.get('id') );
+      this.departmentId = id; 
+    });
+  }
+
+  goPrev(){
+    let PrevId = this.departmentId - 1;
+    this.router.navigate(['/dapartments',PrevId]);
+  }
+
+  goNext(){
+    let nextId = this.departmentId + 1;
+    this.router.navigate(['/dapartments',nextId]);
+  }
+
+}
+
+
+
+departments.component.ts
+==============================
+
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-departments',
+  templateUrl: './departments.component.html',
+  styleUrls: ['./departments.component.css']
+})
+export class DepartmentsComponent implements OnInit {
+
+  departments=[
+    {id:1,name:"Angualr"},
+    {id:2,name:"React"},
+    {id:3,name:"MongoDB"},
+    {id:4,name:"Javascript"},
+    {id:5,name:"Bootstrap"}
+  ];
+  constructor(private route:Router) { }
+
+  ngOnInit() {
+  }
+
+  onSelect(department){
+      this.route.navigate(['/departments',department.id]);
+  }
+
+}
+
+
+department.component.html
+================================
+
+<div class="container">
+<div class="col-md-3">
+    <ul class="list-group">
+        <li *ngFor="let department of departments" class="list-group-item" (click)="onSelect(department)">
+            <span class="badge badge-primary">{{department.id}}</span>{{department.name}}
+        </li>
+    </ul>
+</div>
+</div>
+
+
+department-list.component.html
+======================================
+
+<h4>Department Details</h4>
+<h3>You Selected Department with id = {{departmentId}}</h3>
+
+<button (click)="goPrev()">Previous</button>
+<button (click)="goNext()">Next</button>

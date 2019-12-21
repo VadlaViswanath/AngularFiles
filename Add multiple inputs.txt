@@ -1,0 +1,114 @@
+task.componet.html
+====================
+
+<input type="text" [(ngModel)]="name">
+
+<button (click)='add()'> add</button> <br> <br>
+
+<div *ngIf="set">
+<input type="text" [(ngModel)]="name1">
+<button (click)='remove()'>remove</button>
+<button (click)='add2()'> add</button> <br> <br>
+<button (click)='display()'>display</button>
+</div>
+
+<div *ngIf="get">
+  <input type="text" [(ngModel)]="name2">
+  <button (click)='remove2()'>remove</button>
+  <button (click)='add3()'> add</button> <br> <br>
+  </div>
+
+  <div *ngIf="put">
+    <input type="text" [(ngModel)]="name3">
+    <button (click)='remove3()'>remove</button>
+    <button (click)='add3()'> add</button> <br> <br>
+    </div>
+  
+<!-- <input type="text" [(ngModel)]="name1" *ngIf="set">
+<button (click)='remove()' *ngIf="btn">remove</button> -->
+
+
+<h4 *ngIf="dis">{{name}} <br>{{name1}}--
+{{name2}}--{{name3}}</h4>
+
+
+<!-- fxcbg -->
+
+
+
+<!-- <input type="text" [(ngModel)]="user.name1" name="name1">
+<input type="text" [(ngModel)]="user.name2"  name="name2">
+
+<button (click)="display2()">display2</button>
+
+{{user2.name1}}
+{{user2.name2}} -->
+
+
+=============================
+task.component.ts
+===========================
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-task',
+  templateUrl: './task.component.html',
+  styleUrls: ['./task.component.css']
+})
+export class TaskComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+  name:string;
+  name1:string;
+  name2:string;
+  name3:string;
+
+  set:boolean=false;
+  dis:boolean=false;
+  get:boolean=false;
+  put:boolean=false;
+  //====================
+
+  // user:any={};
+  // user2:any={};
+
+  // display2(){
+  //   this.user2=this.user;
+  // }
+
+
+
+  add(){
+    this.set=true;
+    // this.btn=true;
+  }
+
+  remove(){
+    this.set=false; 
+  }
+
+
+  add2(){ 
+    this.get=true
+  }
+
+  remove2(){
+    this.get=false; 
+  }
+
+  add3(){
+this.put=true
+  }
+
+  remove3(){
+    this.put=false; 
+  }
+
+  display(){
+    this.dis=true
+  }
+}

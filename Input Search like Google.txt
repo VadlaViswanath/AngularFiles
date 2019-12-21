@@ -1,0 +1,33 @@
+component.ts
+==================
+
+import {HttpClient} from '@angular/common/http';
+
+inputSearch:string=" ";
+
+    results1:any=[];
+
+    results2:any=[];
+
+    url:string='https://jsonplaceholder.typicode.com/todos';
+
+    constructor(private hService:HttpClient) {
+      this.hService.get(this.url).subscribe(data=>this.results1=data);
+      this.results2=this.results1;
+     }
+
+     search(){
+      this.results2=this.results1.filter((emp)=>{
+        return emp.title.toLowerCase().indexOf(this.inputSearch.toLowerCase())>=0;
+      });
+     }
+
+component.html
+===================
+
+ Input Search:<input #term type="text" name="search"  [(ngModel)]="inputSearch">
+                 <input type="button" value="search" (click)="search()">   
+
+<ul>
+    <li *ngFor="let result of results2">{{result.title}}</li>
+</ul>

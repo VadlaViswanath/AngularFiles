@@ -1,0 +1,166 @@
+app-routing.module.ts
+===========================
+
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { ProductsComponent } from './products/products.component';
+import { ElectronicsComponent } from './electronics/electronics.component';
+import { FashionComponent } from './fashion/fashion.component';
+import { MobilesComponent } from './mobiles/mobiles.component';
+import { LaptopsComponent } from './laptops/laptops.component';
+import { MenComponent } from './men/men.component';
+import { WomenComponent } from './women/women.component';
+import { DepartmentsComponent } from './departments/departments.component';
+import { DepartmentListComponent } from './department-list/department-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+
+const routes: Routes = [
+  {path:"home",component:HomeComponent},
+  {path:"",component:HomeComponent},
+  {path:"about",component:AboutComponent},
+  {path:"contact",component:ContactComponent},
+  {path:"departments",component:DepartmentsComponent},
+  {path:"departments/:id",component:DepartmentListComponent},
+  {path:"products/:brandName",component:ProductsComponent},
+   {path:"**",component:PageNotFoundComponent}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+app.component.html
+=========================
+
+ <a routerLink="home">Home</a> &nbsp;
+    <a routerLink="about">About</a> &nbsp;
+      <a routerLink="contact">Contact</a> &nbsp;
+        <a routerLink="products/Samsung">Samsung</a> &nbsp;
+          <a routerLink="products/IPhone">Iphone</a> &nbsp;
+            <a routerLink="products/Oneplus">Oneplus</a> &nbsp;
+
+products.service.ts
+==============================
+
+import { Injectable } from '@angular/core';
+import {Product} from './product';
+import { ProductsComponent } from './products/products.component';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ProductsService {
+
+  products:Product[];
+
+  constructor() { 
+    this.products=[
+      new Product(101,"Samsung A8",15000,"Samsung"),
+      new Product(102,"Samsung A30",13000,"Samsung"),
+      new Product(103,"iphone 7",25000,"IPhone"),
+      new Product(104,"iphone 7Plus",35000,"IPhone"),
+      new Product(105,"Oneplus 6",30000,"Oneplus"),
+      new Product(106,"Oneplus 7Plus",32000,"Oneplus"),
+    ];
+  }
+
+
+  getProductByBrand(brandName:string){
+    var selectedProducts:Product[]=[];
+    for(var i=0;i<this.products.length;i++){
+      if(this.products[i].brand==brandName){
+        selectedProducts.push(this.products[i]);
+      }
+    }
+    return selectedProducts;
+  }
+  
+}
+
+product.ts
+=================
+
+export class Product {
+    productId:number;
+    productName:string;
+    cost:number;
+    brand:string;
+
+    constructor(productId:number,productName:string,cost:number,brand:string){
+        this.productId=productId;
+        this.productName=productName;
+        this.cost=cost;
+        this.brand=brand;
+
+    }
+}
+
+
+product.component.ts
+================================
+
+import { Component, OnInit } from '@angular/core';
+import {Product} from '../product';
+import {ProductsService} from '../products.service';
+import {ActivatedRoute} from '@angular/router';
+
+@Component({
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.css']
+})
+export class ProductsComponent implements OnInit {
+
+  brand:string;
+  matchingproducts:Product[]=[];
+
+
+  constructor(private prodService:ProductsService,private route:ActivatedRoute) { }
+
+
+
+  ngOnInit() {
+
+    this.route.params.subscribe(params =>{
+      var selectedBrand = params["brandName"];
+      this.brand = selectedBrand;
+      this.matchingproducts = this.prodService.getProductByBrand(selectedBrand);
+    });
+
+  }
+
+}
+
+
+product.component.html
+===================================
+
+<div>
+    <h2>Products</h2>
+    <h3>{{brand}}</h3>
+
+   <table border="1">
+       <tr>
+           <th>Product ID</th>
+           <th>Product Name</th>
+           <th>Cost</th>
+           <th>Brand</th>
+       </tr>
+
+       <tr *ngFor="let product of matchingproducts">
+            <td>{{product.productId}}</td>
+            <td>{{product.productName}}</td>
+            <td>{{product.cost}}</td>
+            <td>{{product.brand}}</td>
+       </tr>
+   </table> 
+   <br>
+   <a routerLink="/home">Back to Home</a>
+</div>

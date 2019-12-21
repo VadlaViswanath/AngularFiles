@@ -1,0 +1,81 @@
+component.ts
+=====================
+
+import { Component, OnInit } from '@angular/core';
+import {HttpClient,HttpHeaders} from '@angular/common/http'; 
+
+@Component({
+  selector: 'app-login3',
+  templateUrl: './login3.component.html',
+  styleUrls: ['./login3.component.css']
+})
+export class Login3Component implements OnInit {
+
+  // username:string='';
+  // password:string='';
+  user:any={};
+  users:any=[];
+  url:string="http://localhost:3000/users2";
+
+  constructor(private http2:HttpClient) { 
+    this.http2.get(this.url).subscribe(data=>this.users=data);
+  }
+
+  submit(){
+    this.http2.post(this.url,this.user,{headers:new HttpHeaders({"Content-type":"application/json"})}).subscribe(()=>alert("Row added successfully"));
+  }
+
+  search(id:number){
+    
+      this.http2.get(`${this.url}/${id}`).subscribe(data=>this.user=data);
+  }
+
+  ngOnInit() {
+  }
+
+}
+
+// class users2{
+//   username:string;
+//   password:string;
+// }
+
+
+
+component.html
+====================
+
+
+<form #myform="ngForm">
+    Username:<input type="text" [(ngModel)]="user.username" name="username"> <br>
+    Password:<input type="password" [(ngModel)]="user.password" name="password"> <br>
+    Id:<input type="number" [(ngModel)]="user.id" name="id">
+    <button (click)="submit()">Submit</button>
+    <button (click)="search(user.id)">select</button>
+    
+</form>
+
+<div class="container">
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Password</th>
+        </tr>    
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let u of users">
+            <td>{{u.id}}</td>
+            <td>{{u.username}}</td>
+            <td>{{u.password}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+
+<!-- <button (click)="search(user.username)">Search</button> -->
+
+</div>

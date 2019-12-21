@@ -1,0 +1,95 @@
+app.component.html
+=====================
+
+
+<div class="container-fluid align border border-danger">
+  <h6>12.If country selected is INDIA in one select box show all the states of INDIA in another select box.If US show the states of U.S </h6>
+<div style="margin-left:-80px; padding: 35px;">
+    Please select Country:
+    <select [(ngModel)]="selectedCountry">
+      <option *ngFor="let c of cstates">{{c.country}}</option>
+    </select>
+
+  </div>
+
+
+  <div class='row' style="margin-left: 331px;" [ngSwitch]="selectedCountry">
+
+    <div *ngSwitchCase="'india'" style="margin-left: 250px;">
+      <div *ngFor="let c of cstates">
+        <div *ngIf="c.country=='india'" style="margin-left: 55px;">
+          {{selectedCountry}} states:
+          <select>
+            <option *ngFor="let s of c.states">{{s}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'US'" style="margin-left: 250px;">
+      <div *ngFor="let c of cstates">
+        <div *ngIf="c.country=='US'" style="margin-left: 55px;">
+          {{selectedCountry}} states:
+          <select>
+            <option *ngFor="let s of c.states">{{s}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'China'" style="margin-left: 250px;">
+      <div *ngFor="let c of cstates">
+        <div *ngIf="c.country=='China'" style="margin-left: 55px;">
+          {{selectedCountry}} states:
+          <select>
+            <option *ngFor="let s of c.states">{{s}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+app.component.ts
+====================
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Task12';
+  selectedCountry='india';
+selectedCountryy='fhgh';
+
+cstates:any []=[
+{
+  "country":"india",
+"states":['AP','TS','UP']
+},
+{"country":"US",
+"states":['California','Texas','Florida']
+},
+{"country":"China",
+"states":['Hainan','Province','Jiangsu']
+}
+];
+
+}
+
+
+app.component.css
+===================
+
+.align{
+    align-content: center;
+    padding:5%;
+    text-align: center;
+
+}
+
+

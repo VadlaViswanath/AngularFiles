@@ -1,0 +1,28 @@
+npm install ngx-pagination --save
+
+import NgxPaginationModule
+
+
+
+component.ts
+==============
+
+collection=[];
+
+  constructor(){
+    for(var i=1;i<100;i++){
+      this.collection.push(`Angular ${i}.0`);
+    }
+  }
+
+
+component.html
+===================
+
+<ul>
+  <li *ngFor="let item of collection | paginate: { itemsPerPage: 10, currentPage: p }">{{item}} </li>
+</ul>
+
+
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>

@@ -1,0 +1,186 @@
+npm i ngx-pagination
+
+app.module.ts
+================
+import { NgxPaginationModule } from 'ngx-pagination';
+
+imports: [ NgxPaginationModule ]
+
+app.component.html
+==================
+
+<div class="container-fluid align border border-danger">
+    <h6 style="margin-bottom: 23px;">13.Display details of db.json in paginator</h6>
+    
+    <div style="margin-bottom: 23px;">
+      <button (click)="getDetailspage()" class="button page">click here for pagination</button>
+    </div>
+    <table *ngIf='page' class="table table-bordered">
+      <tr>
+        <th>Id</th>
+        <th>name</th>
+        <th>Model</th>
+        <th>gender</th>
+      </tr>
+      <tr *ngFor='let i of obj | paginate: {itemsPerPage: count, currentPage: p }'>
+        <td>{{i.id}}</td>
+        <td>{{i.name}}</td>
+        <td>{{i.Model}}</td>
+        <td>{{i.gender}}</td>
+  
+      </tr>
+  
+    </table>
+    <div class="text-center" *ngIf='page'>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  
+<button (click)="threeRecords()">3 records</button>
+  
+  </div>
+
+app.component.ts
+==================
+
+import { Component } from '@angular/core';
+import { MobileService } from './mobile.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Task13';
+  obj;
+  page = false;
+  p: Number = 1;
+  count: Number = 5;
+   constructor(private service:MobileService){
+
+   }
+
+	threeRecords(){
+		this.count=3;
+	}
+  getDetailspage() {
+    this.service.getApi().subscribe(res => { (this.obj = res), console.log(this.obj) });
+    this.page = true;
+  }
+}
+
+
+app.component.css
+==================
+
+.align{
+    align-content: center;
+    padding:5%;
+    text-align: center;
+
+}
+
+mobile.service.ts
+====================
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MobileService {
+
+  constructor(private  h:HttpClient) { }
+  myurl='http://localhost:3000/products';
+  
+  getApi(){
+    return this.h.get(this.myurl);
+  }
+}
+
+
+db.json
+============
+
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "SAMSUNG",
+      "Model": "AASD",
+      "gender": "male"
+    },
+    {
+      "id": 2,
+      "name": "REDMI",
+      "Model": "ZXCV",
+      "gender": "male"
+    },
+    {
+      "id": 3,
+      "name": "APPLE",
+      "Model": "!!SSDF",
+      "gender": "female"
+    },
+    {
+      "id": 4,
+      "name": "ASUS",
+      "Model": "!!dfg",
+      "gender": "female"
+    },
+    {
+      "id": 5,
+      "name": "REDMI",
+      "Model": "ZXCV",
+      "gender": "male"
+    },
+    {
+      "id": 6,
+      "name": "APPLE",
+      "Model": "!!SSDF",
+      "gender": "female"
+    },
+    {
+      "id": 7,
+      "name": "ASUS",
+      "Model": "!!dfg",
+      "gender": "female"
+    },
+    {
+      "id": 8,
+      "name": "REDMI",
+      "Model": "ZXCV",
+      "gender": "male"
+    },
+    {
+      "id": 9,
+      "name": "APPLE",
+      "Model": "!!SSDF",
+      "gender": "female"
+    },
+    {
+      "id": 10,
+      "name": "ASUS",
+      "Model": "!!dfg",
+      "gender": "female"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

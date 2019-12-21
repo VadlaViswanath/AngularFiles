@@ -1,0 +1,48 @@
+app.component.html
+===================
+
+<div class="container-fluid align border border-danger" >
+    <div >
+        <h6 >19.Intially show add button..If once user clicks hide the add button</h6>
+      
+        <div *ngIf='hide' class="box">
+          <p>Click here to add</p>
+          <button (click)='hideButton()'> Add</button>
+       </div>
+
+      <div *ngIf='hidden' class="box">
+        <p>button has been hidden</p>
+      </div>
+    </div>
+  </div>
+
+app.component.ts
+===================
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Task19';
+  hide=true;
+  hidden=false;
+  hideButton() {
+    this.hide = false;
+    this.hidden = true;
+  }
+}
+
+
+app.component.css
+===================
+
+.align{
+    align-content: center;
+    padding:5%;
+    text-align: center;
+
+}

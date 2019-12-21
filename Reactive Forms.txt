@@ -1,0 +1,88 @@
+	app.module.ts
+==========================
+
+import {ReactiveFormsModule} from '@angular/forms';
+
+
+
+
+reactive.component.ts
+==========================
+
+import { Component, OnInit } from '@angular/core';
+import {FormGroup,FormControl,Validators} from '@angular/forms';
+
+@Component({
+  selector: 'app-reactive-forms',
+  templateUrl: './reactive-forms.component.html',
+  styleUrls: ['./reactive-forms.component.css']
+})
+export class ReactiveFormsComponent implements OnInit {
+
+  msg:string="";
+
+  myform:FormGroup;
+
+  constructor() { 
+    this.myform = new FormGroup({
+      firstname:new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern("^[a-zA-Z]*$")])
+    });
+  }
+
+
+  submit(){
+    if(this.myform.valid){
+      this.msg="FirstName: "+this.myform.controls.firstname.value
+    } else {
+      this.msg="Invalid"
+    }
+  }
+
+
+  ngOnInit() {
+  }
+
+}
+
+
+
+reactive.component.html
+=========================
+
+<h1>Reactive forms:--</h1>
+<form [formGroup]="myform">
+    First Name:
+    <input type="text" formControlName="firstname">
+    <span class="error" *ngIf="myform.controls.firstname.touched && myform.controls.firstname.invalid && myform.controls.firstname.errors.required">FirstName can't be blanked</span>
+
+    <span class="error" *ngIf="myform.controls.firstname.touched && myform.controls.firstname.invalid && myform.controls.firstname.errors.minlength">minimum Five charecters</span>
+
+    <span class="error" *ngIf="myform.controls.firstname.touched && myform.controls.firstname.invalid && myform.controls.firstname.errors.maxlength">maximum 15 charecters</span>
+
+    <span class="error" *ngIf="myform.controls.firstname.touched && myform.controls.firstname.invalid && myform.controls.firstname.errors.pattern">alphabets only allowed</span>
+    <br>
+
+    
+    <input type="submit" value="submit" (click)="submit()"><br>
+
+    <div [innerHTML]="msg">
+
+    </div>
+
+
+</form>
+
+
+reactive.component.css
+==============================
+
+
+.error{
+    color: red;
+}
+input.ng-invalid.ng-touched{
+    border: 2px solid red;
+}
+input.ng-valid.ng-touched{
+ border: 2px solid green;
+}

@@ -1,0 +1,122 @@
+component.ts
+===================
+
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Router } from '@angular/router';
+@Component({
+  selector: 'app-crud-http',
+  templateUrl: './crud-http.component.html',
+  styleUrls: ['./crud-http.component.css'],
+  encapsulation: ViewEncapsulation.Emulated
+})
+export class CrudHttpComponent implements OnInit {
+  employe:Employee[];
+  y:any={};
+  url:string='http://localhost:3000/employees';
+  constructor(private http:HttpClient, private _router: Router) { 
+
+     //this.http.get<Employee[]>(this.url).subscribe(x => this.employe=x);
+    this.http.get<Employee[]>(this.url).subscribe((x) => {
+this.employe = x;
+    }, (err) => {
+console.log(err)
+    }, () => {
+this._router.navigate['login'];
+    }
+);
+  }
+
+  addRow(){
+    this.http.post(this.url,this.y,{headers:new HttpHeaders({"content-type":"application/json"})}).subscribe(()=>alert("Row added successfully"));
+    console.log(this.y);
+  }
+
+  searchRowById(id:number){
+    this.http.get(`${this.url}/${id}`).subscribe(x =>this.y=x);
+  }
+
+  updateRow(id:number){
+    this.http.put(`${this.url}/${id}`,this.y,{headers:new HttpHeaders({"content-type":"application/json"})}).subscribe(()=>alert("Row updated Successfully"));
+  }
+
+  deleteRow(id:number){
+    this.http.delete(`${this.url}/${id}`).subscribe(x => this.y=x);
+  }
+
+  ngOnInit() {
+  }
+
+}
+
+class Employee{
+  id:number;
+  name:string;
+  job:string;
+  salary:string;
+}
+
+
+
+
+component.html
+=============================
+
+<h1>CRUD Operations using http Service</h1>
+
+<div class="container">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>EMPLOYEE NAME</th>
+                <th>JOB</th>
+                <th>SALARY</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let e of employe">
+                <td>{{e.id}}</td>
+                <td>{{e.name}}</td>
+                <td>{{e.job}}</td>
+                <td>{{e.salary}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    
+    <button (click)="addRow()" class="btn btn-success">AddRow</button> &nbsp;
+    <button (click)="searchRowById(y.id)" class="btn btn-info">Select</button> &nbsp;
+    <button (click)="updateRow(y.id)" class="btn btn-warning">UpdateRow</button> &nbsp;
+    <button (click)="deleteRow(y.id)" class="btn btn-danger">DeleteRow</button> 
+    
+    <br> <br> 
+    
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <td><input type="text" [(ngModel)]="y.id" /></td>
+        </tr>
+    
+        <tr>
+            <th>Employee Name</th>
+            <td><input type="text" [(ngModel)]="y.name" /></td>
+        </tr>
+    
+        <tr>
+            <th>JOB</th>
+            <td><input type="text" [(ngModel)]="y.job" /></td>
+        </tr>
+    
+        <tr>
+            <th>Salary</th>
+            <td><input type="number" [(ngModel)]="y.salary" /></td>
+        </tr>
+    </table>
+
+
+</div>
+

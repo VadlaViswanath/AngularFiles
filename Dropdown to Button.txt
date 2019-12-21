@@ -1,0 +1,46 @@
+Component.ts
+================
+country:string;
+  countries=["India","USA","Japan","Canada"];
+  
+  navigate(){
+    this.router.navigate(['../dashboard']);
+  }
+
+  navigate2(){
+    this.router.navigate(['../animation']);
+  }
+
+componet.html
+====================
+
+<select  [(ngModel)]="country" >
+        <option>Select One</option>
+        <!-- <option>India</option>
+        <option>Canada</option>
+        <option>USA</option> -->
+        <option *ngFor="let item of countries">{{item}}</option>
+</select> <br><br>
+
+
+<div [ngSwitch]="country">
+    <p *ngSwitchCase="'India'">
+        <button class="btn btn-success" (click)="navigate()">Click Here</button>  
+    </p>
+
+    <p *ngSwitchCase="'Canada'">
+        <button class="btn btn-primary" (click)="navigate2()">Click here 2</button> 
+    </p>
+
+    <p *ngSwitchCase="'USA'">
+        <button class="btn btn-warning" (click)="navigate2()">Click here 2</button> 
+    </p>
+
+    <p *ngSwitchCase="'Japan'">
+        <button class="btn btn-danger" (click)="navigate()">Click here 2</button> 
+    </p>
+
+    <p *ngSwitchDefault>
+        please select any
+    </p>
+</div>

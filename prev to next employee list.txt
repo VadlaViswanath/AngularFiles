@@ -1,0 +1,224 @@
+list-employees.component.html
+==============================
+
+<button class="btn btn-primary" (click)="nextEmployee()">Next Employee</button>
+
+<div *ngFor="let employee of employees">
+ <app-display-employee [employee]="employeeDisplay"></app-display-employee> 
+
+<!-- <app-display-employee [employee]="employees[0]"></app-display-employee> -->
+</div>
+list-employees.component.ts
+=============================
+
+import { Component, OnInit } from '@angular/core';
+import { Employee } from 'src/app/model/employee.model';
+import { EmployeeServiceService } from '../employee-service.service';
+
+@Component({
+  selector: 'app-list-employees',
+  templateUrl: './list-employees.component.html',
+  styleUrls: ['./list-employees.component.css']
+})
+export class ListEmployeesComponent implements OnInit {
+
+  employees:Employee[]=[];
+  employeeDisplay:Employee;
+   private arrayIndex=1;
+  constructor(private _employeeService:EmployeeServiceService) { }
+
+  ngOnInit() {
+    this.employees=this._employeeService.getEmployee();
+     this.employeeDisplay=this.employees[0];
+  }
+
+   nextEmployee(){
+     if(this.arrayIndex<=2){
+       this.employeeDisplay=this.employees[this.arrayIndex];
+       this.arrayIndex++;
+     } else {
+       this.employeeDisplay=this.employees[0];
+       this.arrayIndex=1;
+     }
+ 	 }
+
+
+}
+
+
+
+display-employee.component.html
+==================================
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{employee.name}}</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="col-xs-10">
+            <div class="row vertical-align">
+                <div class="col-xs-4">
+                    <img class="imageClass" [src]="employee.photoPath"/>
+                </div>
+                <div class="col-xs-8">
+
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Gender
+                        </div>
+                        <div class="col-xs-6">
+                            : {{employee.gender}}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                            <div class="col-xs-6">
+                                Date Of Birth
+                            </div>
+                            <div class="col-xs-6">
+                                    : {{employee.dateOfBirth | date}}
+                            </div>
+                    </div>
+
+                    <div class="row">
+                            <div class="col-xs-6">
+                                Contact Preference
+                            </div>
+                            <div class="col-xs-6">
+                                : {{employee.contactPreference}}
+                            </div>
+                    </div>
+
+                    <div class="row">
+                            <div class="col-xs-6">
+                                Email
+                            </div>
+                            <div class="col-xs-6">
+                                : {{employee.email}}
+                            </div>
+                    </div>
+
+                    <div class="row">
+                            <div class="col-xs-6">
+                                Mobile
+                            </div>
+                            <div class="col-xs-6">
+                                : {{employee.mobile}}
+                            </div>
+                    </div>
+
+                    <div class="row">
+                            <div class="col-xs-6">
+                                Department
+                            </div>
+                            <!-- <div class="col-xs-6">
+                                : {{employee.department}}
+                            </div> -->
+
+                            <div class="col-xs-6" [ngSwitch]="employee.department">
+                                : 
+                                <span *ngSwitchCase="1">Help Desk</span>
+                                <span *ngSwitchCase="2">IT</span>
+                                <span *ngSwitchCase="3">HR</span>
+                                <span *ngSwitchCase="4">PayRoll</span>
+                                <span *ngSwitchDefault>N/A</span>
+                            </div>
+                    </div>
+
+                    <div class="row">
+                            <div class="col-xs-6">
+                                Is Active
+                            </div>
+                            <div class="col-xs-6">
+                                : {{employee.isActive}}
+                            </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+display-employee.component.ts
+================================
+
+import { Component, OnInit, Input } from '@angular/core';
+import { Employee } from '../model/employee.model';
+
+@Component({
+  selector: 'app-display-employee',
+  templateUrl: './display-employee.component.html',
+  styleUrls: ['./display-employee.component.css']
+})
+export class DisplayEmployeeComponent implements OnInit {
+
+  @Input() employee:Employee;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  // getEmployeeNameGender(){
+  //   return this.employee.name + ' ' + this.employee.gender;
+  // }
+
+}
+
+
+employee-service.service.ts
+================================
+
+import { Injectable } from '@angular/core';
+import { Employee } from '../model/employee.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class EmployeeServiceService {
+
+  listEmployees:Employee[]=[
+    {id:1,
+      name:"visu",
+      gender:'male',
+      contactPreference:'email',
+      email:'visu@gmail.com',
+      dateOfBirth:new Date('02/24/1994'),
+      department:'2',
+      isActive:true,
+      photoPath:'assets/images/mario.png'
+      },
+      {id:2,
+        name:"mary",
+        gender:'female',
+        contactPreference:'mobile',
+        mobile:1236547890,
+        dateOfBirth:new Date('05/15/1995'),
+        department:'3',
+        isActive:false,
+        photoPath:'assets/images/teddy.png'
+        },
+        {id:3,
+          name:"john",
+          gender:'male',
+          contactPreference:'mobile',
+          mobile:1236327890,
+          dateOfBirth:new Date('06/21/1997'),
+          department:'4',
+          isActive:true,
+          photoPath:'assets/images/mask.png'
+          }
+  ];
+  constructor() { }
+
+  getEmployee():Employee[]{
+    return this.listEmployees;
+  }
+
+  save(employee:Employee){
+    this.listEmployees.push(employee);
+  }
+}

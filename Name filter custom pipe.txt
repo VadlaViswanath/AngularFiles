@@ -1,0 +1,36 @@
+employee-filter.pipe.ts
+============================
+
+import { Pipe, PipeTransform } from '@angular/core';
+import { Employee } from '../model/employee.model';
+import { EmployeeServiceService } from './employee-service.service';
+
+@Pipe({
+  name: 'employeeFilter'
+})
+export class EmployeeFilterPipe implements PipeTransform {
+
+  transform(employees:Employee[],searchTerm:string): Employee[] {
+    if(!employees || !searchTerm){
+      return employees
+    }
+
+    return employees.filter( employee => 
+      employee.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+  }
+
+}
+
+
+component.html
+===================
+
+<div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="searchTerm" style="width: 300px;" placeholder="search by name">
+</div>
+
+<div *ngFor="let employee of employees | employeeFilter:searchTerm">
+	<div (click)="onClick(employee.id)" class="pointCursor">
+        <app-display-employee [employee]="employee" #ChildComponent></app-display-employee>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+app.component.html
+=======================
+
+
+<div class="form-group container-fluid align border border-danger align">
+    <h6>17.have the functionality of file download in form </h6>
+     
+  <img [src]="url" height="200px" width="250p" alt="upload image"  >
+  <input type="file"  (change)="onSelectAnyFile($event)"  accept="image/*"   style="margin-bottom: 20px;">
+</div>
+
+<div class="container-fluid   align">
+<input type="button"  (click)="filedownloads()" value="Download image Data"/>
+
+<p class="align">{{OnAdding}}</p>
+</div>
+
+
+app.component.ts
+==================
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  source: string;
+  file: string;
+  
+ 
+    
+  
+ 
+  constructor( private http: HttpClient) {  }
+
+  url:any;
+  OnAdding: string;
+ 
+  
+  onSelectAnyFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+  
+      reader.readAsDataURL(event.target.files[0]); 
+  
+      reader.onload = (event:Event) => { 
+        this.url = reader.result;      
+        localStorage.setItem('imageurl',JSON.stringify(this.url))
+        sessionStorage.setItem('imageurl1',JSON.stringify(this.url))
+      console.log(this.url)
+      }   
+    }
+   let size  = event.srcElement.files[0].size ;
+    
+    if(size >=(1024*1024)*1){
+      this.OnAdding="file should not be 1 mb"
+    }
+    else 
+    {
+      this.OnAdding="Uploaded successfully"
+    }
+   
+  }
+  ngOnInit() {
+  }
+ 
+  filedownloads() {  
+   var any = JSON.parse(localStorage.getItem('imageurl'));
+   console.log(any,'data')
+    console.log("File Data ", any);
+    let downloadLink = document.createElement('a');
+    downloadLink.href = any;
+    downloadLink.download = 'image'; 
+    downloadLink.click();
+}
+
+}

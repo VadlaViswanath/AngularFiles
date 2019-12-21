@@ -1,0 +1,111 @@
+login.component.ts
+===========================
+
+import { Component, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
+
+url:string='http://localhost:3000/users2';
+users2:any=[];
+// users2:user1[]=[];
+u={};
+username:string;
+password:number;
+
+  constructor(private _http:HttpClient,private _router:Router) {
+
+    this._http.get(this.url).subscribe((log) => this.users2=log);
+    // this._http.get<user1[]>(this._url).subscribe((log) => this.users2=log);
+    
+   }
+
+
+   //=============================
+
+   userFunc(username,password):boolean{
+     var status=false;
+    for(let u of this.users2){
+      if(u.login == this.username && u.password == this.password){
+        status=true;
+        break;
+      }
+    }
+
+    return status; // be reminder this
+   }
+
+
+  //===========================================
+
+
+
+   login2(){
+     if(this.userFunc(this.username,this.password)){
+    // if(this.login == "visu" && this.password == 3698)
+      this._router.navigate(['./electronics']);
+       alert("Login Credentials are correct");
+     } else
+     alert("Login Credentials are Incorrect");
+   }
+
+
+  ngOnInit() {
+  }
+
+}
+
+//=====================
+
+// class user1{
+//   login:string;
+//   password:number;
+// }
+
+
+
+
+
+
+filename.json
+=====================
+
+[
+   "users2": [
+    {
+      "login": "visu@gmail.com",
+      "password": "3698fg",
+      "id": 1
+    },
+    {
+      "login": "madhu@gmail.com",
+      "password": "madhu0023",
+      "id": 2
+    }
+  ]
+
+]
+
+
+
+
+login.component.html
+=============================
+
+<form>
+    <input type="text" name="mail" [(ngModel)]="username">
+    <input type="password" name="pwd" [(ngModel)]="password">
+    <button type="button" class="btn btn-info btn-sm" (click)="login2()">login</button>
+</form>
+
+
+<!-- <div *ngFor="let us of users2">
+    <h4>{{us.username}}</h4>
+    <h4>{{us.password}}</h4>
+</div> -->

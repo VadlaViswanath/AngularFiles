@@ -1,0 +1,209 @@
+								LazyLoading
+							===========================
+
+
+	step-1  app.component.html
+======================================						
+					   
+
+			<h1>Angular</h1>
+<a [routerLink]="['/pageone']" style="margin-right: 100px;"><b>Page-One</b></a>
+<a [routerLink]="['/lazy']" style="margin-right: 100px;"><b>lazy</b></a><br>
+<router-outlet></router-outlet>
+
+
+   step-2   pageone.component.ts
+================================
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-pageone',
+  templateUrl: './pageone.component.html',
+  styleUrls: ['./pageone.component.css']
+})
+export class PageoneComponent implements OnInit {
+    var_one:string;
+
+  constructor() {
+    this.var_one="iam from page one !!!";
+   }
+
+  ngOnInit() {
+  }
+
+}
+
+
+step-3  pageonee.component.html
+=================================
+
+<h1 style="color: red;">{{var_one}}</h1>
+
+
+step-4 na.Module.ts
+===========================
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CountriesComponent } from './countries.component';
+
+import {CountriesService} from "./countries.service";
+import {HttpClientModule} from "@angular/common/http";
+import {Routes,RouterModule} from "@angular/router";
+import { from } from 'rxjs';
+
+export const appRoutes:Routes =[
+    {path:"", component:CountriesComponent}
+];
+
+
+@NgModule({
+  declarations: [CountriesComponent],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    RouterModule.forChild(appRoutes)
+  ],
+  providers:[CountriesService],
+  exports:[CountriesComponent]
+})
+export class NaModule { }
+
+
+
+
+step-5  countries.service.ts
+==============================
+
+import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import { from } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CountriesService {
+
+  constructor(private _http:HttpClient) { }
+
+    url:string="https://restcountries.eu/rest/v2/all";
+
+    getCountries():any{
+       return this._http.get(this.url);
+    }
+}
+
+step-6 countries.component.ts
+====================================
+
+import { Component, OnInit } from '@angular/core';
+import {CountriesService} from './countries.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import { from } from 'rxjs';
+
+@Component({
+  selector: 'app-countries',
+  templateUrl: './countries.component.html',
+  styleUrls: ['./countries.component.css']
+})
+export class CountriesComponent implements OnInit {
+   private result:any;
+  constructor(private _cs:CountriesService) {
+     
+   }
+
+  ngOnInit() {
+    this._cs.getCountries().subscribe( (positive)=>{this.result=positive},
+      (err:HttpErrorResponse)=>{
+        if(err.error instanceof Error){
+           console.log("client side error");
+        }
+        else{
+          console.log("server side error");
+        }
+      }); 
+  }
+
+}
+
+
+step-7 countries.component.html
+=======================================
+
+<table border="2">
+    <tr *ngFor="let x of result"> 
+        <td>{{x.name}}</td>
+        <td>{{x.capital}}</td>
+        <td>{{x.currencies[0].code}}</td>
+        <td><img width="100px" height="100px" src="{{x.flag}}"></td>
+    </tr>
+</table>
+
+step-8 app-routing.module.ts
+===============================
+
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import {PageoneComponent} from './pageone.component';
+
+ import {ModuleWithProviders} from '@angular/core';
+ import { ExpectedConditions } from 'protractor';
+
+// const routes: Routes = [];
+export const appRoutes:Routes =[
+  {path:"pageone",component:PageoneComponent},
+  {path:"lazy" ,loadChildren:'./na.module#NaModule'}
+];
+
+export const lazyRoutes:ModuleWithProviders = RouterModule.forRoot(appRoutes);
+
+@NgModule({
+  imports: [RouterModule.forRoot(appRoutes)],
+  exports: [RouterModule]
+})
+
+ 
+
+export class AppRoutingModule { }
+
+
+step-9 app.module.ts
+=================================
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { PageoneComponent } from './pageone.component';
+// import { CountriesComponent } from './countries.component';
+import { from } from 'rxjs';
+
+
+import { lazyRoutes } from './app-routing.module';
+// import { authGuard } from './auth.gaurd';
+
+
+
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    PageoneComponent,
+   
+  ],
+  imports: [
+    BrowserModule,
+    lazyRoutes,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+

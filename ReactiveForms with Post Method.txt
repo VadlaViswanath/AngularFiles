@@ -1,0 +1,151 @@
+Reactive-Forms.component.ts
+===================================
+
+import { Component, OnInit } from '@angular/core';
+import {FormGroup,FormControl} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+
+@Component({
+  selector: 'app-reactive-forms',
+  templateUrl: './reactive-forms.component.html',
+  styleUrls: ['./reactive-forms.component.css']
+})
+export class ReactiveFormsComponent implements OnInit {
+
+_url:string='http://localhost:3000/users';
+
+  constructor(private _hserve:HttpClient) { }
+
+registerForm=new FormGroup({
+  fullName:new FormControl('visu'),
+  password:new FormControl(''),
+  email:new FormControl(''),
+  mobile:new FormControl(''),
+  address:new FormGroup({
+    city:new FormControl(''),
+    state:new FormControl(''),
+    postalCode:new FormControl('')
+  })
+
+});
+
+  ngOnInit() {
+  }
+
+  submit(){
+    this._hserve.post(this._url,this.registerForm.value).subscribe((res)=>console.log(res));
+  }
+
+
+}
+
+
+Reactive-Forms.component.html
+============================
+
+<p>reactive-forms works!</p>
+
+
+<form [formGroup]="registerForm">
+    <div class="form-group">
+        <label class="col-sm-2">FullName</label>
+        <div class="col-sm-10">
+        <input class="form-control" type="text" name="fullname" formControlName="fullName">
+    </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2">Password</label>
+        <div class="col-sm-10">
+        <input class="form-control" type="password" name="password" formControlName="password">
+    </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2">Email</label>
+        <div class="col-sm-10">
+        <input class="form-control" type="email" name="email" formControlName="email">
+    </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2">Mobile Number</label>
+        <div class="col-sm-10">
+        <input class="form-control" type="number" name="mobile" formControlName="mobile">
+    </div>
+    </div>
+
+    <div formGroupName="address">
+        <div class="form-group">
+            <label class="col-sm-2">City</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" name="city" formControlName="city">
+            </div>
+        </div>
+        
+    <div class="form-group">
+        <label class="col-sm-2">State</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="state" formControlName="state">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-sm-2">Postal Code</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="number" name="postalCode" formControlName="postalCode">
+        </div>
+    </div>
+
+    </div>
+
+
+    <button class="btn btn-primary" (click)="submit()" [disabled]="registerForm.invalid">Submit</button>
+</form>
+
+<div class="jumbotron">{{registerForm.value | json}}--{{registerForm.status | json}}</div>
+
+
+
+
+filename.json
+===================
+
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "users": [
+    {
+      "fullName": "viswanath",
+      "id": 1
+    },
+    {
+      "fullName": "visu",
+      "password": "visu",
+      "email": "viswanathvadla94@gmail.com",
+      "mobile": 9441403658,
+      "address": {
+        "city": "kurnool",
+        "state": "AP",
+        "postalCode": 518422
+      },
+      "id": 3
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+app.module.ts
+====================
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { RouterModule ,Routes} from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+
+
+const mylink:Routes=[
+  {
+  path:'home',
+  component:HomeComponent
+},
+{
+  path:'login',
+  component:LoginComponent
+}
+]
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    LoginComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    RouterModule.forRoot(mylink)
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+============================
+app.component.html
+=====================
+
+<div class="align">
+    <h6>9.Based on login gender ,display icon picture 
+        </h6>
+    <a class="align" routerLink="/login">Click here to Login</a>
+  
+    <router-outlet></router-outlet>
+ </div>
+========================
+login.component.html
+=====================
+
+<form class="container-fluid align border border-danger">
+        <div class="align" style="padding: 38px;">
+         <label>UserName:</label>
+         <input type="text" [(ngModel)]="username" name="username"><br>
+         <label>Password:</label>
+        <input type="password"[(ngModel)]="password" name="password"><br>
+     
+        <input type='radio'[(ngModel)]="gender" name="gender" value="male">Male<br>
+        <input type='radio'[(ngModel)]="gender" name="gender" value="female">Female<br> 
+        
+        <button (click)="Login()">Login</button>
+     </div>
+     
+=======================     
+login.component.ts
+=======================
+
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
+
+
+  ngOnInit() {
+  }
+  username='';
+  password='';
+  gender='';
+  constructor(private route:Router){
+
+  }
+  Login(){
+
+    this.route.navigate(['/home']);
+    localStorage.setItem("genderdet",this.gender);
+    localStorage.setItem("name",this.username);
+    console.log(this.gender);
+  }
+
+}
+
+=========================
+home.component.html
+========================
+
+<div class="align">
+        <h6 style="padding: 34px;">Hello {{name}}!! Welcome</h6>
+        <div *ngIf='genderm'>
+            <img [src]=micon/>
+    
+        </div>
+        <div *ngIf='!genderm'>
+            <img [src]=ficon/>
+            </div>
+</div>
+
+=====================
+home.component.ts
+========================
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+
+  constructor() { }
+  gender;
+  name;
+ genderm:boolean;
+ micon='../assets/male.jpg';
+ ficon='../assets/female.jpg';
+
+  ngOnInit() {
+    this.name=localStorage.getItem("name");
+   this.gender=localStorage.getItem("genderdet");
+   console.log(this.name);
+   console.log(this.gender);
+   if(this.gender=='male'){
+     debugger;
+     this.genderm=true;
+     console.log(this.genderm);
+
+   }
+   else{
+     this.genderm=false;
+   }
+  }
+
+}
+
+

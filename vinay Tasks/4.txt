@@ -1,0 +1,184 @@
+app.component.html
+===================
+
+<div class="container-fluid align border border-danger ">
+  <h6>4) get multiple addresses from user using form Array and post in db.json file</h6>
+    <h6>Address Array</h6>
+
+    <form [formGroup]="adform" (ngSubmit)="postToDb()">
+        
+
+   
+
+            <div formArrayName="address" class="ale">
+                <div *ngFor="let item of adform.get('address').controls;let i=index">
+                    <h6>address :{{i}}</h6>
+                    <div formGroupName="{{i}}">
+                        <label style="padding: 12px;">Id</label>
+                        <input formControlName="id"  value='{{i}}'/><br>
+                        <label>Plot num</label>
+                        <input formControlName="plotnum" /><br>
+                        <label>area</label>
+                        <input formControlName="area" /><br>
+                        <label>city</label>
+                        <input formControlName="city" />
+
+                    </div>
+
+
+                </div>
+                <h6>If you want to add another address,Please click here</h6>
+        <button  type="button" style="margin: 36px;" (click)="addAddress()">Add address</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+             
+    </form >
+
+
+app.component.ts
+===================
+
+import { Component } from '@angular/core';
+import{FormBuilder, Validators,FormArray, FormGroup} from '@angular/forms';
+
+import { AddressService } from './address.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Task4';
+
+  myresp: Object;
+  address:FormArray;
+  adform:FormGroup;
+  constructor(private formbuilder:FormBuilder,private service:AddressService) { }
+
+  ngOnInit() {
+    this.adform=this.formbuilder.group({
+      address:this.formbuilder.array([this.createItem()])
+
+      
+    })
+  }
+  // addAddress(){
+  //   (this.adform.controls.address as FormArray).push(this.formbuilder.group({
+  //     id:['',[Validators.required]],
+  //     plotnum:['',[Validators.required]],
+  //     area:['',[Validators.required]],
+  //     city:['',[Validators.required]]
+
+  //   }))
+
+  // }
+
+
+ 
+
+
+
+    createItem() {
+    return this.formbuilder.group({
+           id:['',[Validators.required]],
+      plotnum:['',[Validators.required]],
+      area:['',[Validators.required]],
+      city:['',[Validators.required]]
+    })
+  }
+
+  addAddress() {
+    this.address = this.adform.get('address') as FormArray;
+    this.address.push(this.createItem());
+    
+  }
+
+
+  postToDb(){
+    //console.log(this.address.value);
+  
+ //console.log(this.adform.value);
+ for(let i=0;i<this.address.value.length;i++){
+  //sthis.service.postApi(this.address[i]);
+  //console.log(this.address.value[i]);
+  this.service.postApi(this.address.value[i]).subscribe(res=>console.log(res));
+    }
+ 
+
+  }
+}
+
+  app.component.css
+=====================
+
+.align{
+    align-content: center;
+    padding:5%;
+    text-align: center;
+
+}
+
+
+address.service.ts
+===================
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AddressService {
+
+  constructor(private h:HttpClient) { }
+  
+  postApi(obj){
+    console.log(obj);
+ 
+     return this.h.post('http://localhost:3000/address',obj);
+   }
+}
+
+ db.json
+=============
+
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "address": [
+    {
+      "id": 1,
+      "plotnum": "dfdf",
+      "area": "fdg",
+      "city": "pune"
+    },
+    {
+      "id": "2",
+      "plotnum": "sdef",
+      "area": "sfd",
+      "city": "sdf"
+    },
+    {
+      "id": "3",
+      "plotnum": "sef",
+      "area": "sdf",
+      "city": "sfd"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

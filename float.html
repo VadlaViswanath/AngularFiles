@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<style type="text/css">
+		
+		
+		.column{
+			width:25%;
+			height:200px;
+			float:left;
+		}
+		
+	@media screen and (max-width: 320px){
+		  .column {
+			width: 100%;
+			float:none;
+			
+		  }
+		}
+	
+	
+	
+	@media screen and  (max-width: 720px){
+		  .column {
+			width: 50%;
+			
+		  }
+		}
+	</style>
+</head>
+<body>
+
+	<div class='row'>
+		<div class='column' style='background-color:red;color:white'>1</div>
+		<div class='column' style='background-color:blue;color:white'>2</div>
+		<div class='column' style='background-color:black;color:white'>3</div>
+		<div class='column' style='background-color:green;color:white'>4</div>
+	
+	</div>
+
+
+<script>
+
+let input = {
+  "status": "success",
+  "message": "product_feed search successfully ",
+  "result": [{
+    "_id": "5a4cdd33d87d7bad7d0d183d",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/8746351_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "Con.Struct Men's Slim-Fit Multi-Color Checkered Shirt",
+    "regular_price": "$68.00",
+    "description": "A colorful addition to your short-sleeve lineup, this slim-fit Checkered shirt from ConStruct features just the right amount of stretch to keep you equally tailoRed and comfortable.",
+    "color": "White",
+    "pattern": "Multicolor",
+    "deep_colors": "Blue",
+    "neckline": "shirtcollar",
+    "sleeve_style": "halfsleeve",
+    "score": 36.300000000000004
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d183e",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://media.kohlsimg.com/is/image/kohls/2835822?wid=500&hei=500&op_sharpen=1",
+    "title": "Men's \"Corona Extra\" Button-Down Shirt",
+    "regular_price": "$36.00",
+    "description": "Relaxation requiRed. Pour on the casual style with this men's Corona Extra shirt.",
+    "color": "Blue",
+    "pattern": "Multicolor",
+    "deep_colors": "White",
+    "neckline": "shirtcollar",
+    "sleeve_style": "halfsleeve",
+    "score": 36.3
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d1883",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://media.kohlsimg.com/is/image/kohls/2366586?wid=500&hei=500&op_sharpen=1",
+    "title": "Men's Michael Brandon Southern Vintage Plaid Button-Down Shirt",
+    "regular_price": "$60.00",
+    "description": "This men's button-down shirt by Michael Brandon is a sight for sore eyes.",
+    "color": "Blue",
+    "pattern": "Multicolor",
+    "deep_colors": "White",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 36.3
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d145c",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/9/optimized/8929059_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "Men's Camo Shirt",
+    "regular_price": "$79.50",
+    "description": "Crisp cotton and an angular camo pattern finish this shirt from Armani Exchange and your luxe laid-back look.",
+    "color": "Blue",
+    "pattern": "Multicolor",
+    "deep_colors": "Black",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 27.5
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d14c3",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/8929041_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "Men's Camouflage Shirt",
+    "regular_price": "$69.50",
+    "description": "Crisp cotton and an angular camouflage pattern finish this shirt from Armani Exchange and your luxe laid-back look.",
+    "color": "Blue",
+    "pattern": "Multicolor",
+    "deep_colors": "Black",
+    "neckline": "shirtcollar",
+    "sleeve_style": "halfsleeve",
+    "score": 27.5
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d183b",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/7/optimized/8950737_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "BS by Men's Plaid Woven Shirt",
+    "regular_price": "$79.00",
+    "description": "Perfect for casual days and outdoor adventures, Blake Shelton's plaid button-down features soft cotton finished with dual pockets at the chest and buttoned cuffs for when you're ready to roll up your sleeves.",
+    "color": "Red",
+    "pattern": "Multicolor",
+    "deep_colors": "White",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 26.400000000000002
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d1882",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://media.kohlsimg.com/is/image/kohls/2366557?wid=500&hei=500&op_sharpen=1",
+    "title": "Men's Michael Brandon Southern Vintage Green Plaid Button-Down Shirt",
+    "regular_price": "$60.00",
+    "description": "This men's Michael Brandon button-down shirt is simply resplendent.",
+    "color": "Aqua",
+    "pattern": "Multicolor",
+    "deep_colors": "Blue",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 26.400000000000002
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d1459",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/9/optimized/8603859_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "BOSS Men's Sharp-Fit Cotton Dress Shirt",
+    "regular_price": "$145.00",
+    "description": "This dress shirt by BOSS features a contemporary spread collar and dual-striped pattern for an update to elegant style.",
+    "color": "White",
+    "pattern": "checkered",
+    "deep_colors": "White",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 25.300000000000004
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d145a",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/7/optimized/9013357_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "Men's Classic-Fit Coastal Plaid Shirt",
+    "regular_price": "$75.00",
+    "description": "Colorful plaid details a breathable crisp cotton button-down from Nautica, sporting a relaxed cut to carry you from the workday to the weekend.",
+    "color": "Blue",
+    "pattern": "argyle",
+    "deep_colors": "Blue",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 25.300000000000004
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d1466",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/4/optimized/8627934_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "Men's Gingham Shirt",
+    "regular_price": "$34.99",
+    "description": "Club Room delivers classic style that's perfect for weekend relaxation with this gingham button-down in soft cotton and featuring a long-sleeve silhouette for versatile wear.",
+    "color": "White",
+    "pattern": "checkered",
+    "deep_colors": "Gray",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 25.300000000000004
+  }]
+};
+
+let output = {
+  "36.30": [{
+    "_id": "5a4cdd33d87d7bad7d0d183d",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/8746351_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "Con.Struct Men's Slim-Fit Multi-Color Checkered Shirt",
+    "regular_price": "$68.00",
+    "description": "A colorful addition to your short-sleeve lineup, this slim-fit Checkered shirt from ConStruct features just the right amount of stretch to keep you equally tailoRed and comfortable.",
+    "color": "White",
+    "pattern": "Multicolor",
+    "deep_colors": "Blue",
+    "neckline": "shirtcollar",
+    "sleeve_style": "halfsleeve",
+    "score": 36.300000000000004
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d183e",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://media.kohlsimg.com/is/image/kohls/2835822?wid=500&hei=500&op_sharpen=1",
+    "title": "Men's \"Corona Extra\" Button-Down Shirt",
+    "regular_price": "$36.00",
+    "description": "Relaxation requiRed. Pour on the casual style with this men's Corona Extra shirt.",
+    "color": "Blue",
+    "pattern": "Multicolor",
+    "deep_colors": "White",
+    "neckline": "shirtcollar",
+    "sleeve_style": "halfsleeve",
+    "score": 36.3
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d1883",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://media.kohlsimg.com/is/image/kohls/2366586?wid=500&hei=500&op_sharpen=1",
+    "title": "Men's Michael Brandon Southern Vintage Plaid Button-Down Shirt",
+    "regular_price": "$60.00",
+    "description": "This men's button-down shirt by Michael Brandon is a sight for sore eyes.",
+    "color": "Blue",
+    "pattern": "Multicolor",
+    "deep_colors": "White",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 36.3
+  }],
+  "27.50": [{
+    "_id": "5a4cdd33d87d7bad7d0d145c",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/9/optimized/8929059_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "Men's Camo Shirt",
+    "regular_price": "$79.50",
+    "description": "Crisp cotton and an angular camo pattern finish this shirt from Armani Exchange and your luxe laid-back look.",
+    "color": "Blue",
+    "pattern": "Multicolor",
+    "deep_colors": "Black",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 27.5
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d14c3",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/1/optimized/8929041_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "Men's Camouflage Shirt",
+    "regular_price": "$69.50",
+    "description": "Crisp cotton and an angular camouflage pattern finish this shirt from Armani Exchange and your luxe laid-back look.",
+    "color": "Blue",
+    "pattern": "Multicolor",
+    "deep_colors": "Black",
+    "neckline": "shirtcollar",
+    "sleeve_style": "halfsleeve",
+    "score": 27.5
+  }],
+  "26.40": [{
+    "_id": "5a4cdd33d87d7bad7d0d183b",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/7/optimized/8950737_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "BS by Men's Plaid Woven Shirt",
+    "regular_price": "$79.00",
+    "description": "Perfect for casual days and outdoor adventures, Blake Shelton's plaid button-down features soft cotton finished with dual pockets at the chest and buttoned cuffs for when you're ready to roll up your sleeves.",
+    "color": "Red",
+    "pattern": "Multicolor",
+    "deep_colors": "White",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 26.400000000000002
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d1882",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://media.kohlsimg.com/is/image/kohls/2366557?wid=500&hei=500&op_sharpen=1",
+    "title": "Men's Michael Brandon Southern Vintage Green Plaid Button-Down Shirt",
+    "regular_price": "$60.00",
+    "description": "This men's Michael Brandon button-down shirt is simply resplendent.",
+    "color": "Aqua",
+    "pattern": "Multicolor",
+    "deep_colors": "Blue",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 26.400000000000002
+  }],
+  "25.30": [{
+    "_id": "5a4cdd33d87d7bad7d0d1459",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/9/optimized/8603859_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "BOSS Men's Sharp-Fit Cotton Dress Shirt",
+    "regular_price": "$145.00",
+    "description": "This dress shirt by BOSS features a contemporary spread collar and dual-striped pattern for an update to elegant style.",
+    "color": "White",
+    "pattern": "checkered",
+    "deep_colors": "White",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 25.300000000000004
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d145a",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/7/optimized/9013357_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "Men's Classic-Fit Coastal Plaid Shirt",
+    "regular_price": "$75.00",
+    "description": "Colorful plaid details a breathable crisp cotton button-down from Nautica, sporting a relaxed cut to carry you from the workday to the weekend.",
+    "color": "Blue",
+    "pattern": "argyle",
+    "deep_colors": "Blue",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 25.300000000000004
+  }, {
+    "_id": "5a4cdd33d87d7bad7d0d1466",
+    "object": "shirt",
+    "gender": "male",
+    "image_url": "https://slimages.macysassets.com/is/image/MCY/products/4/optimized/8627934_fpx.tif?op_sharpen=1&wid=400&hei=489&fit=fit,1&$filterlrg$",
+    "title": "Men's Gingham Shirt",
+    "regular_price": "$34.99",
+    "description": "Club Room delivers classic style that's perfect for weekend relaxation with this gingham button-down in soft cotton and featuring a long-sleeve silhouette for versatile wear.",
+    "color": "White",
+    "pattern": "checkered",
+    "deep_colors": "Gray",
+    "neckline": "shirtcollar",
+    "sleeve_style": "longsleeve",
+    "score": 25.300000000000004
+  }]
+}
+
+
+
+</script>
+
+</body>
+</html>

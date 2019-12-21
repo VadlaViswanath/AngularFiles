@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div id="div">
+<h1 >check the data</h1>
+
+<input type='text' id='input0'>
+</div><br>
+<div id='table'>
+<table id='tableObj'>
+<tbody id="data">
+</tbody>
+</table>
+</div>
+<div id='dyinput'></div>
+<br>
+<div id='valprint'></div><br>
+<input type ="button" id="button"  onclick='Dispinputs()' value="add inputs">
+<input type ="button" id="button" onclick='getVal()' value="GetValues from all fields"><br><br>
+<div id="dynamicdyp">
+
+</div>
+<script>
+var i=1;
+function Dispinputs(){
+//alert("add input");
+$("#data").append('<tr><td><input type="text" id="input'+i+'" /></td></tr><br><br>');
+//$("#dyinput").append("<input type="text" id="input'+i+'" /><br><br>");//error 
+i++;
+}
+function getVal(){
+// var addingnumber= document.getElementById("input0").value;
+// var add=addingnumber+2;
+// var sub=addingnumber-2;
+// alert(add)
+// var aliasNames='';
+  var rowLength =  $('#tableObj >tbody >tr').length;
+//alert("rowLength :"+rowLength);
+ //aliasNames = '';
+
+ for (var j = 0; j <= rowLength; j++) {
+var name=$("#input"+j).val();
+//alert(name);
+$('#valprint').append('<p>'+name+'</p>');
+ //aliasNames += ',' + name;
+ //alert(aliasNames);
+}
+}
+
+</script>
+</body>
+</html>
+

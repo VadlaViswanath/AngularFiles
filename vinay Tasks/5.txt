@@ -1,0 +1,185 @@
+app.component.html
+======================
+
+<div class="container-fluid align border border-danger bottom">
+    <h6 class='align  '>5.Get details from db.json and depending on the gender put all male records in 1 div and female records in another div</h6>
+    <button (click)="getDetailsGender()" class="button">Show details based on gender</button>
+  
+    <h6 *ngIf='clicked' class="padding: 25px;">Male Details</h6>
+  
+    <div>
+      <div *ngFor="let i of obj1" class="col-md-12">
+  
+        <div class="row" *ngIf='(i.gender)==gender1' [ngClass]="{'table-bordered border-danger':'clicked'}">
+  
+          <p class='col-2'>{{i.gender}}</p>
+          <p class='col-2'>{{i.id}}</p>
+          <p class='col-2'>{{i.name}}</p>
+          <p class='col-2'>{{i.city}}</p>
+  
+        </div>
+      </div>
+    </div>
+    <br>
+  
+    <h6 *ngIf='clicked'>Female Details</h6>
+    <div>
+      <div *ngFor="let i of obj1" class="col-md-12">
+  
+        <div class="row" *ngIf='(i.gender)==gender2' [ngClass]="{'table-bordered border-danger':'clicked'}">
+  
+          <p class='col-2'>{{i.gender}}</p>
+          <p class='col-2'>{{i.id}}</p>
+          <p class='col-2'>{{i.name}}</p>
+          <p class='col-2'>{{i.city}}</p>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+app.component.ts
+======================
+
+import { Component } from '@angular/core';
+import { UserService } from './user.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Task5';
+  clicked = false;
+  obj1:any;
+  gender1 = 'male';
+  gender2 = 'female';
+  constructor(private service:UserService){
+
+
+  }
+  getDetailsGender() {
+    this.service.getApi().subscribe(res => {
+       this.obj1 = res; 
+      console.log(this.obj1) });
+    this.clicked = true;
+  }
+}
+
+
+app.component.css
+======================
+
+.align{
+    align-content: center;
+    padding:5%;
+    text-align: center;
+
+}
+
+user.service.ts
+===================
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+
+  constructor(private h:HttpClient) { }
+  myurl='http://localhost:3000/users';
+
+  getApi(){
+    return this.h.get(this.myurl);
+  }
+}
+
+
+db.json
+============
+
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Ramu",
+      "city": "HYD",
+      "gender": "male"
+    },
+    {
+      "id": 2,
+      "name": "Raju",
+      "city": "Mum",
+      "gender": "male"
+    },
+    {
+      "id": 3,
+      "name": "Sita",
+      "city": "Kolkata",
+      "gender": "female"
+    },
+    {
+      "id": 4,
+      "name": "Nikhil",
+      "city": "Hyd",
+      "gender": "male"
+    },
+    {
+      "id": 5,
+      "name": "Priya",
+      "city": "Mum",
+      "gender": "female"
+    },
+    {
+      "id": 6,
+      "name": "Siri",
+      "city": "Bnglr",
+      "gender": "female"
+    },
+    {
+      "id": 7,
+      "name": "Raji",
+      "city": "Delhi",
+      "gender": "female"
+    },
+    {
+      "id": 8,
+      "name": "Mani",
+      "city": "Pune",
+      "gender": "male"
+    },
+    {
+      "id": 9,
+      "name": "Shailu",
+      "city": "Hyd",
+      "gender": "female"
+    },
+    {
+      "id": 10,
+      "name": "Radha",
+      "Model": "Hyd",
+      "gender": "female"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

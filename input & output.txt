@@ -1,0 +1,215 @@
+
+		parent to child:--
+		==================
+
+parent.ts:--
+---------
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  templateUrl: './parent.component.html',
+  styleUrls: ['./parent.component.css']
+})
+export class ParentComponent implements OnInit {
+
+  constructor() { }
+
+  name:string="iam from parent";
+
+  ngOnInit() {
+  }
+
+}
+
+
+prent.html:---
+----------------
+
+<div class="cls">
+ <h1>parent</h1>
+<app-child [person]="name"></app-child>
+</div>
+
+parent.css:--
+-------------
+
+.cls{
+    border: 2px solid rgb(47, 68, 255);
+    width: 600px;
+    padding: 20px;
+    margin: 20px;
+}
+
+-------------------------------
+child.ts:---
+---------
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css']
+})
+export class ChildComponent implements OnInit {
+
+  @Input() person:string;
+
+  constructor() { }
+
+  ngOnInit() { }
+
+ 
+  
+}
+
+child.html:---
+---------
+
+
+<div class="cls2">
+    <h3>child</h3>
+    <h1>{{person}}</h1>
+</div>
+
+child.css:---
+---------
+
+.cls2{
+    border: 2px solid red;
+    width: 300px;
+    padding: 20px;
+    margin: 20px;
+}
+
+app.componet.html:---
+---------------
+
+<h1>parent to child</h1>
+<div>
+<app-parent></app-parent>
+</div>
+
+=================================================
+
+
+
+
+		child to parent:--
+		==================
+
+child2.ts:---
+--------------
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-child2',
+  templateUrl: './child2.component.html',
+  styleUrls: ['./child2.component.css']
+})
+export class Child2Component implements OnInit {
+
+  msg:string="iam from child";
+
+ @Output() msgEvent=new EventEmitter<string>();
+
+  constructor() { }
+
+  message(){
+    this.msgEvent.emit(this.msg);
+  }
+
+  ngOnInit() { }
+
+}
+
+child2.html:---
+--------------
+
+<div class="cls2">
+    <h1>child</h1>
+ <h4>sending data to parent</h4>
+ <button (click)="message()">send</button>
+</div>
+
+
+
+child2.:---
+--------------
+
+.cls2{
+    border: 2px solid red;
+    width: 300px;
+    padding: 20px;
+    margin: 20px;
+}
+
+
+parent2.ts:----
+---------------
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-parent2',
+  templateUrl: './parent2.component.html',
+  styleUrls: ['./parent2.component.css']
+})
+export class Parent2Component implements OnInit {
+  message:string;
+
+  reciveMesg($event){
+    this.message=$event;
+  }
+  constructor() { }
+ 
+  ngOnInit() {
+  }
+
+}
+
+
+parent2.html:----
+---------------
+
+<div class="cls">
+    <h1>parent</h1>
+    <h2>{{message}}</h2>
+    <app-child2 (msgEvent)="reciveMesg($event)"></app-child2>
+</div>
+
+
+parent2.css:----
+---------------
+
+.cls{
+    border: 2px solid gold;
+    width: 600px;
+    padding: 20px;
+    margin: 20px;
+}
+
+app.comoponent.html:------
+---------------------
+<h1>child to parent</h1>
+<div>
+    <app-parent2></app-parent2>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

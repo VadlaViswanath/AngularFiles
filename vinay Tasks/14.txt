@@ -1,0 +1,106 @@
+app.component.html
+======================
+
+
+
+  <div class="container-fluid align border border-danger" style="margin-top: 109px;">
+    <h6>14.while adding new data to record,it should be displayed in the first row  of the table </h6>
+      <h6  >Click here to add new data</h6>
+   
+    <form #userdetails="ngForm" (submit)="userdeatails(userdetails)">
+
+      <section style="padding: 15px;">
+        <label>Username:</label>
+        <input #uname="ngModel" name="username" type="text" [(ngModel)]="name" />
+
+
+
+      </section>
+      <section>
+        <label>Bankname:</label>
+        <input #bankname="ngModel" name="bankname" type="text" [(ngModel)]="bname" />
+      </section>
+
+      <br>
+      <section>
+        <label>gender :</label>
+        <input type="radio" #genderfld="ngModel" [(ngModel)]="gender" name="gender" required="true" value="male" />Male
+        <input type="radio" #genderfld="ngModel" [(ngModel)]="gender" name="gender" required="true"
+          value="female" />female
+      </section>
+
+      <div class="text-center">
+        <button>Submit</button>
+      </div>
+      <br>
+
+    </form>
+
+
+
+  </div>
+  <br>
+
+  <div class="container-fluid align ">
+    <h5  >Click here to see the whole data</h5>
+    <button (click)="showData()">click</button>
+  </div>
+  
+  <div>
+  <div *ngIf='showdata'>
+    <table class="table table-bordered">
+        <tr>
+          <th>Username</th>
+          <th>Bankname</th>
+          <th>Gender</th>
+        </tr>
+        <tr *ngFor="let i of uarray">
+          <td>{{i.username}}</td>
+          <td>{{i.bankname}}</td>
+          <td>{{i.gender}}</td>
+        </tr>
+    </table>
+
+  </div>
+  </div>
+
+app.component.ts
+===================
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Task14';
+  uarray=[{
+    "username":"radhika",
+    "bankname":"hdfc",
+    "gender":"female"
+  },{
+    "username":"radha",
+    "bankname":"idfc",
+    "gender":"female"
+  },{
+    "username":"rajii",
+    "bankname":"andhra",
+    "gender":"male"
+  }];
+  userdeatails(f){
+    //console.log(f.value);
+    this.uarray.unshift(f.value);
+    console.log(this.uarray);
+  }
+  
+  
+  
+  showdata:boolean=false;
+  showData(){
+    this.showdata=true;
+  }
+}
+
+

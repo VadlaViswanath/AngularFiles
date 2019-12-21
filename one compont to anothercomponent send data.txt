@@ -1,0 +1,102 @@
+						
+				 data send to one component to another component:----
+ 				===============================================
+
+company.ts:--
+-----------
+
+import { Component, OnInit } from '@angular/core';
+import {CompanyService} from '../company.service';
+
+@Component({
+  selector: 'app-company',
+  templateUrl: './company.component.html',
+  styleUrls: ['./company.component.css'],
+
+})
+export class CompanyComponent implements OnInit {
+
+mobilenum:number=6281869490;
+
+  constructor(private _cm:CompanyService) { 
+    this._cm.phno=this.mobilenum;
+  }
+
+  ngOnInit() {
+  }
+
+}
+
+
+ 
+company.serveice.ts:----
+-----------------
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CompanyService {
+phno:number;
+  constructor() { }
+}
+
+
+
+
+app module.ts:--
+----------------
+
+import { CompanyService } from './company.service';
+
+  providers: [CompanyService],
+
+
+
+employee.ts:-----
+-------------
+
+import { Component, OnInit } from '@angular/core';
+import {CompanyService} from '../company.service';
+
+@Component({
+  selector: 'app-employee',
+  templateUrl: './employee.component.html',
+  styleUrls: ['./employee.component.css']
+})
+export class EmployeeComponent implements OnInit {
+
+  mobile:number;
+
+  constructor(private cs:CompanyService) {
+    this.mobile=this.cs.phno;
+   }
+
+  ngOnInit() {
+  }
+
+}
+
+
+
+employee.html:---
+--------------
+
+<div class="cls">
+<p>employee works!</p>
+
+<h1>{{mobile}}</h1>
+</div>
+
+
+
+employee.css:----
+---------------
+
+.cls{
+    border: 2px solid rgb(47, 68, 255);
+    width: 600px;
+    padding: 20px;
+    margin: 20px;
+}

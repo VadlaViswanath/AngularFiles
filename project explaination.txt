@@ -1,0 +1,33 @@
+
+snap on tools
+===============
+snap on is company to manufacturing the hand tools and power tiools drill machines.
+it is the us based company to market the all over the world.
+And also it is located in india also.
+If we want to buy the machines to place the order in online.
+it is the e-commerce website like flipkart. 
+we used to make website skills like html css bootstrap javascript jquery
+
+
+crunchbase
+=================
+crunchbase is a web App to develop a project in Angular.
+It is the website to search what ever we want like organizations people location and etc..
+we used routing, navigating to another component
+we get the matching data for what we search
+   
+
+Crunchbase is the leading platform for professionals to discover innovative companies, connect with the people behind them, 
+and pursue new opportunities. Over 55 million professionals—including entrepreneurs, investors, market researchers, 
+and salespeople—trust Crunchbase to inform their business decisions. And companies all over the world rely on us to power their applications, 
+making over a billion calls to our API each year.
+
+
+Alvar
+=========
+
+Alvar is a Web Application where the organization (UHG) can view and track the
+status of its Members who have enrolled for its insurance policy.
+Health Insurance is a kind of insurance that provides coverage for medical expenses to the policy holder. Depending on the health insurance 
+plan chosen the policy holder can get coverage for critical illness expenses, surgical expenses, hospital expenses etc
+ 

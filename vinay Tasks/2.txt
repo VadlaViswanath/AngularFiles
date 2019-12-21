@@ -1,0 +1,70 @@
+first install ngx-image-compress package(service)
+npm install ngx-image-compress
+
+app.module.ts
+=================
+
+import {NgxImageCompressService} from 'ngx-image-compress';
+
+providers: [NgxImageCompressService]
+
+
+
+app.component.ts
+==================
+
+import { Component } from '@angular/core';
+import {NgxImageCompressService} from 'ngx-image-compress';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  imgcompressed;
+  constructor(private img:NgxImageCompressService){
+
+  }
+
+compressImage(){
+  this.img.uploadFile().then(({image, orientation}) => {
+    this.imgcompressed = image;
+    console.log('Size of original image:', this.img.byteCount(image));
+    if(this.img.byteCount(image)>5000000){
+    this.img.compressFile(image, orientation, 20,20).then(
+      result => {
+        this.imgcompressed = result;
+        console.log('Size of compressed img:', this.img.byteCount(result));
+      }
+    );
+    }
+    else{
+      this.imgcompressed=image;
+      console.log(this.img.byteCount(this.imgcompressed));
+
+    }
+    
+  });
+
+}
+}
+
+app.component.html
+==================
+
+<div class="container-fluid align border border-danger">
+  <h6>2.Upload image and if image is greater than 5 MB compress to 50KB and then accept</h6>
+  <button (click)="compressImage()">upload Image</button><br>
+  <img *ngIf="imgcompressed" [src]="imgcompressed" >
+</div>
+
+app.component.css
+==================
+
+.align{
+    align-content: center;
+    padding:5%;
+    text-align: center;
+
+}

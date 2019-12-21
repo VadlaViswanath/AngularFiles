@@ -1,0 +1,38 @@
+htmlChange.directive.ts
+=============================
+
+import { Directive, ElementRef } from '@angular/core';
+
+@Directive({
+  selector: '[appHtmlChange]'
+})
+export class HtmlChangeDirective {
+
+  constructor(private _dr:ElementRef) { 
+    this._dr.nativeElement.style.backgroundColor='red';
+    this._dr.nativeElement.style.color='#ffff';
+    // this._dr.nativeElement.innerHTML='viswanath';
+	
+
+
+  }
+
+}
+
+
+reactiveforms.component.html
+==============================
+
+<tbody>
+            <tr *ngFor="let user of users;let i=index">
+                <td appHtmlChange>{{user.fullName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.mobile}}</td>
+                <td>{{user.address.city}}</td>
+                <td>{{user.address.state}}</td>
+                <td>{{user.address.postalCode}}</td>
+                <td>{{user.id}}</td>
+                <th><button (click)="edit(i)" class="btn btn-primary">Edit</button></th>
+                <td><button (click)="delete(i)" class="btn btn-primary">Delete</button></td>
+            </tr>
+        </tbody>

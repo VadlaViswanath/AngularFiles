@@ -1,0 +1,61 @@
+npm install ngx-bootstrap
+
+
+app.module.ts
+================
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule,
+  ]
+
+
+
+app.component.html
+======================
+
+<div class="container-fluid ">
+    <h6 class="align">7.Onclicking a show date button display calendar </h6>
+      <div class="row" style='margin: 0 auto;margin-left: 650px;'>
+        <div class="form-group">
+          <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker  [bsValue]="bsInlineValue" >
+        </div>
+        <div class="col-xs-12 col-12 col-md-3 form-group">
+          <button class="btn btn-primary" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen" type="button">
+            Show Date</button>
+    
+        </div>
+
+app.component.ts
+======================
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Task7';
+  bsInlineValue = new Date();
+  constructor(){
+    
+  }
+}
+
+
+app.component.css
+======================
+
+.align{
+    align-content: center;
+    padding:5%;
+    text-align: center;
+
+}
