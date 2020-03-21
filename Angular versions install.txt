@@ -1,0 +1,9 @@
+npm install -g @angular@4.3.4  4.4.7
+npm install -g @angular@5.2.11
+npm install -g @angular@6.1.3
+npm install -g @angular@7.2.15
+npm install -g @angular@8.2.2
+
+
+
+httpModule in 4 -- httpClientModule in 6 

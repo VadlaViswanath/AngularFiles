@@ -1,0 +1,62 @@
+<input type="text" id="name" name="name">
+<button onClick="send()">send</button>
+
+<script>
+var arr=[];
+function send(){
+	var name1=document.getElementById('name').value;
+	var obj={};
+    obj.name2=name1;
+    arr.push(obj);
+	console.log(obj);
+    console.log(arr);
+    console.log(typeof obj);
+    name1='';
+    console.log(arr.length);
+}
+</script>
+//=======================
+<input type="text" id="name" name="name">
+<button onClick="send()">send</button>
+
+<p id="demo"></p>
+<script>
+var arr=[];
+var obj={name2:"visu"};
+function send(){
+	var name1=document.getElementById('name').value;
+    obj.name2=name1;
+    arr.push(obj);
+	
+    
+    let pval="";
+    for(let i=0;i<=arr.length;i++){
+    	document.getElementById('demo').innerHTML+=arr[i].name2+"<br>";
+    }
+    
+     
+}
+</script>
+//=======================
+
+<input type="text" id="name" name="name">
+<button onClick="send()">send</button>
+
+<p id="demo"></p>
+<script>
+var arr=[];
+function send(){
+	var name1=document.getElementById('name').value;
+	var obj={name2:''};
+    obj.name2=name1;
+    arr.push(obj);
+	
+    
+    let pval="";
+    for(let i=0;i<=arr.length;i++){
+    	document.getElementById('demo').innerHTML+=arr[i].name2+"<br>";
+    }
+    
+     
+}
+</script>

@@ -1,0 +1,15 @@
+npm install -g @angular/cli
+ng new myApp
+ng serve
+
+
+ng g c myComponent   
+ng g pipe myPipe
+ng g directive myDirective
+
+ng g c employee/myComponent  --no-spec   ===> employee is floder
+
+feature modules
+=================
+ng g module view
+ng g c view/view-component  ======> component in view module

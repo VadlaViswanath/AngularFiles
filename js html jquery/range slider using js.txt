@@ -1,0 +1,35 @@
+=============
+javascript
+==============
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Write something in the text field to trigger a function.</p>
+<span>0</span>
+<input type="range" id="myInput" oninput="myFunction()" min="0" max="20000">
+<span>100</span>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput").value;
+  document.getElementById("demo").innerHTML = "You wrote: " + x;
+}
+</script>
+
+</body>
+</html>
+
+=============
+Angular
+=================
+
+<span>0</span>
+<input type="range" [(ngModel)]="range1" min="0" max="1000">
+<span>1000</span>
+<h4>Range value is : {{range1}}</h4>
+  

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>send form data  to table using javascript</h2>
+
+<form onsubmit="myFunction()">
+	Name:<input type="text" id="name" required> <br>
+    MobileNumber:<input type="number" id="mobile" required> <br>
+    Email:<input type="email" id="mail" required> <br>
+    DateOfBirth:<input type="date" id="dob" required> <br>
+	<input type="submit" value="submit">
+</form> <br>
+
+<table id="myTable" border="1">
+	<tr>
+    	<th>Name<th>
+        <th>Mobile Number<th>
+        <th>Email<th>
+        <th>Date of Birth<th>
+    </tr>
+    
+</table>
+
+<script>
+function myFunction() {
+  var table = document.getElementById("myTable");
+  var row = table.insertRow();
+  var cell1 = row.insertCell();
+  var cell2 = row.insertCell();
+  var cell3 = row.insertCell();
+  var cell4 = row.insertCell();
+  cell1.innerHTML = document.getElementById("name").value;
+  cell2.innerHTML = document.getElementById("mobile").value;
+  cell3.innerHTML = document.getElementById("mail").value;
+  cell4.innerHTML = document.getElementById("bob").value;
+}
+
+</script>
+
+</body>
+</html>

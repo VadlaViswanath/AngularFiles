@@ -21,13 +21,6 @@ import * as $ from 'jquery';
 })
 export class AnimationComponent implements OnInit {
 
-
- 
-
-
-
-
-
   constructor() { }
 
   ngOnInit() {
@@ -69,7 +62,7 @@ export class AnimationComponent implements OnInit {
 
 
   }
-currentstate:string="bigger";
+currentstate:string="small";
 
 bigData(){
   this.currentstate="bigger";

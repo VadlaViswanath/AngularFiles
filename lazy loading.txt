@@ -41,7 +41,7 @@ step-3  pageonee.component.html
 <h1 style="color: red;">{{var_one}}</h1>
 
 
-step-4 na.Module.ts
+step-4 na.module.ts
 ===========================
 
 import { NgModule } from '@angular/core';
@@ -108,10 +108,9 @@ import { from } from 'rxjs';
   styleUrls: ['./countries.component.css']
 })
 export class CountriesComponent implements OnInit {
+
    private result:any;
-  constructor(private _cs:CountriesService) {
-     
-   }
+  constructor(private _cs:CountriesService) {   }
 
   ngOnInit() {
     this._cs.getCountries().subscribe( (positive)=>{this.result=positive},
@@ -140,6 +139,28 @@ step-7 countries.component.html
     </tr>
 </table>
 
+
+
+AuthAuth.Guard.ts
+===================
+import { Injectable } from '@angular/core';
+import { CanActivate, CanLoad } from '@angular/router';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuardGuard implements CanLoad {
+  canLoad(): boolean {
+    return confirm("Are you sure navigate another route ?");
+  }
+  
+  
+}
+
+
+
+
 step-8 app-routing.module.ts
 ===============================
 
@@ -153,10 +174,10 @@ import {PageoneComponent} from './pageone.component';
 // const routes: Routes = [];
 export const appRoutes:Routes =[
   {path:"pageone",component:PageoneComponent},
-  {path:"lazy" ,loadChildren:'./na.module#NaModule'}
+  {path:"lazy" ,loadChildren:'./na.module#NaModule',canLoad:[AuthGuardGuard]}
 ];
 
-export const lazyRoutes:ModuleWithProviders = RouterModule.forRoot(appRoutes);
+//export const lazyRoutes:ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],

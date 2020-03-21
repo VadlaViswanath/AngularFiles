@@ -1,0 +1,59 @@
+app.component.html
+====================
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  firstname:<input type="text" formControlName="firstname"> <br>
+  lastname:<input type="text" formControlName="lastname"><br>
+  age:<input type="text" formControlName="age"><br>
+  Email:<input type="text" formControlName="email"><br>
+  Address:
+  <div formGroupName="address">
+    address1:<input type="text" formControlName="address1"><br>
+  State:<input type="text" formControlName="state"><br>
+  Zip:<input type="text" formControlName="zip"><br>
+  </div>
+  <input type="submit" value="submit" [disabled]="!userForm.valid">
+</form>
+
+
+
+app.component.ts
+====================
+
+
+import { Component } from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {Validators} from '@angular/forms';
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.css' ]
+})
+export class AppComponent  {
+  
+  constructor(private fb: FormBuilder){}
+
+  userForm = this.fb.group({
+    firstname:['',Validators.required],
+    lastname:[''],
+    age:[''],
+    email:[''],
+    address:this.fb.group({
+      address1:['',Validators.required],
+      state:[''],
+      zip:['']
+    })
+  })
+
+
+onSubmit(){
+  console.log(this.userForm.value);
+  // console.log(this.userForm.controls['firstname'].value);
+
+// var firstname=this.userForm.get('firstname').value;
+  // console.log(firstname);
+  console.log(this.userForm.get('lastname').value);
+console.log(this.userForm.get(['address','address1']).value);
+}
+
+}

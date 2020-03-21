@@ -1,3 +1,60 @@
+
+employee-service.service.ts
+================================
+
+import { Injectable } from '@angular/core';
+import { Employee } from '../model/employee.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class EmployeeServiceService {
+
+  listEmployees:Employee[]=[
+    {id:1,
+      name:"visu",
+      gender:'male',
+      contactPreference:'email',
+      email:'visu@gmail.com',
+      dateOfBirth:new Date('02/24/1994'),
+      department:'2',
+      isActive:true,
+      photoPath:'assets/images/mario.png'
+      },
+      {id:2,
+        name:"mary",
+        gender:'female',
+        contactPreference:'mobile',
+        mobile:1236547890,
+        dateOfBirth:new Date('05/15/1995'),
+        department:'3',
+        isActive:false,
+        photoPath:'assets/images/teddy.png'
+        },
+        {id:3,
+          name:"john",
+          gender:'male',
+          contactPreference:'mobile',
+          mobile:1236327890,
+          dateOfBirth:new Date('06/21/1997'),
+          department:'4',
+          isActive:true,
+          photoPath:'assets/images/mask.png'
+          }
+  ];
+  constructor() { }
+
+  getEmployee():Employee[]{
+    return this.listEmployees;
+  }
+
+  save(employee:Employee){
+    this.listEmployees.push(employee);
+  }
+}
+
+
+
 list-employees.component.html
 ==============================
 
@@ -169,56 +226,3 @@ export class DisplayEmployeeComponent implements OnInit {
 }
 
 
-employee-service.service.ts
-================================
-
-import { Injectable } from '@angular/core';
-import { Employee } from '../model/employee.model';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class EmployeeServiceService {
-
-  listEmployees:Employee[]=[
-    {id:1,
-      name:"visu",
-      gender:'male',
-      contactPreference:'email',
-      email:'visu@gmail.com',
-      dateOfBirth:new Date('02/24/1994'),
-      department:'2',
-      isActive:true,
-      photoPath:'assets/images/mario.png'
-      },
-      {id:2,
-        name:"mary",
-        gender:'female',
-        contactPreference:'mobile',
-        mobile:1236547890,
-        dateOfBirth:new Date('05/15/1995'),
-        department:'3',
-        isActive:false,
-        photoPath:'assets/images/teddy.png'
-        },
-        {id:3,
-          name:"john",
-          gender:'male',
-          contactPreference:'mobile',
-          mobile:1236327890,
-          dateOfBirth:new Date('06/21/1997'),
-          department:'4',
-          isActive:true,
-          photoPath:'assets/images/mask.png'
-          }
-  ];
-  constructor() { }
-
-  getEmployee():Employee[]{
-    return this.listEmployees;
-  }
-
-  save(employee:Employee){
-    this.listEmployees.push(employee);
-  }
-}

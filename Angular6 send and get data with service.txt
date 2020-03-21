@@ -1,0 +1,111 @@
+ang6-service.service.ts
+=======================
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class Ang6ServiceService {
+
+  constructor(private _http:HttpClient) { }
+
+  url:string="http://localhost:3000/users";
+
+  send(obj){
+   return this._http.post(this.url,obj);
+  }
+
+
+  get(){
+    return this._http.get(this.url);
+  }
+}
+
+
+ang6-comp.component.html
+==========================
+
+<div class="container">
+  <form #myForm="ngForm" (ngSubmit)="submit(myForm.value)">
+      <div class="form-group">
+          <label>Name</label>
+          <input type="text" [(ngModel)]="name" class="form-control" name="name">
+      </div>
+  
+      <div class="form-group">
+          <label>Mobile</label>
+          <input type="text" [(ngModel)]="mobile" class="form-control" name="mobile">
+      </div>
+  
+      <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" [(ngModel)]="dob" class="form-control" name="dob">
+      </div>
+      
+      <input type="submit" value="submit" class="btn btn-warning">
+  </form>
+
+  <br><br>
+
+
+  <button (click)="getData()" class="btn btn-primary">Get Data</button>
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Date of Birth</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let data of arrayData">
+                <td>{{data.name}}</td>
+                <td>{{data.mobile}}</td>
+                <td>{{data.dob}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+ang6-comp.component.ts
+========================
+
+
+
+import { Component, OnInit } from '@angular/core';
+import { Ang6ServiceService } from '../ang6-service.service';
+
+@Component({
+  selector: 'app-ang6-comp',
+  templateUrl: './ang6-comp.component.html',
+  styleUrls: ['./ang6-comp.component.css']
+})
+export class Ang6CompComponent implements OnInit {
+
+  constructor(private _A6Service:Ang6ServiceService) { }
+
+  arrayData:any=[];
+  submit(data){
+    this._A6Service.send(data).subscribe(
+        ()=>{
+          alert('Form Data send Successfully');
+        }
+    )
+  }
+
+
+  getData(){
+    this._A6Service.get().subscribe((x)=>{
+      this.arrayData=x;
+    })
+  }
+  ngOnInit() {
+  }
+
+}

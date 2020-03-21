@@ -101,7 +101,7 @@ Reactive-Forms.component.html
     </div>
 
 
-    <button class="btn btn-primary" (click)="submit()" [disabled]="registerForm.invalid">Submit</button>
+    <button class="btn btn-primary" (click)="submit()" [disabled]="!registerForm.valid">Submit</button>
 </form>
 
 <div class="jumbotron">{{registerForm.value | json}}--{{registerForm.status | json}}</div>

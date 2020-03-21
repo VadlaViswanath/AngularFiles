@@ -1,0 +1,35 @@
+first.component.ts
+=====================
+
+<p>I am from first component</p>
+
+<div class="form-group col-sm-6">
+    <label>Range :</label>
+    <span>0</span>
+    <input type="range" [(ngModel)]="range" min="0" max="1000000" >
+    <span>{{range | range}}</span>
+	<input type="text" [(ngModel)]="range">
+</div>
+
+
+<h4>Your range money is : {{range | currency:"INR"}}</h4>
+
+range.pipe.ts
+==================
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'range'
+})
+export class RangePipe implements PipeTransform {
+
+  transform(value: any, ...args: any[]): any {
+    if(value >=1000 && value<100000){
+      return Math.round(value/1000) + 'k';
+    } 
+      return Math.round(value/100000) + 'L';
+    }
+  
+
+}

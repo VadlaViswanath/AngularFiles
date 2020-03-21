@@ -1,0 +1,80 @@
+app.component.html
+=====================
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  firstname:<input type="text" formControlName="firstname"> <br>
+  age:<input type="text" formControlName="age"><br>
+  Email:<input type="text" formControlName="email"><br>
+
+<div formArrayName="mobiles">
+  <h4>Enter your Mobile number</h4>
+  <div *ngFor="let mob of mobiles.controls; let i=index">
+    Mobile{{i+1}}:<input type="text" [formControlName]="i">
+<button class="" (click)="deleteNumber(i)">delete</button>
+  </div>
+  <button (click)="addNewMobile()">Add New Mobile Number</button>
+</div>
+
+
+  <input type="submit" value="submit" [disabled]="!userForm.valid">
+</form>
+
+
+app.component.ts
+=====================
+
+import { Component } from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {Validators} from '@angular/forms';
+import {FormArray} from '@angular/forms';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.css' ]
+})
+export class AppComponent  {
+  
+  constructor(private fb: FormBuilder){}
+  userForm = this.fb.group({
+    firstname:['',Validators.required],
+    age:[''],
+    email:[''],
+    mobiles:this.fb.array([
+      this.fb.control('')
+    ])
+  })
+
+  get mobiles(){
+    return this.userForm.get('mobiles') as FormArray;
+  }
+
+addNewMobile(){
+  this.mobiles.push(this.fb.control(''));
+}
+
+deleteNumber(index){
+    this.mobiles.removeAt(index);
+  }
+counter:number;
+onSubmit(){
+  // console.log(this.userForm.value);
+  // console.log(this.userForm.controls['firstname'].value);
+  // var firstname=this.userForm.get('firstname').value;
+  // console.log(firstname);
+  // console.log(this.userForm.get('lastname').value);
+  // console.log(this.userForm.get(['address','address1']).value);
+  //  console.log("Mobiele 1 is"+this.userForm.get(['mobiles','0']).value);
+
+  this.counter=0;
+  for(let mob of this.mobiles.controls){
+
+    console.log("Mobile "+(this.counter+1)+"::"+this.userForm.get(['mobiles',this.counter]).value);
+    this.counter++;
+  }
+
+}
+
+
+}
+

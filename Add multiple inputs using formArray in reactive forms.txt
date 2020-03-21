@@ -1,0 +1,75 @@
+add-inputs.component.ts
+=============================
+
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
+
+@Component({
+  selector: 'app-add-inputs',
+  templateUrl: './add-inputs.component.html',
+  styleUrls: ['./add-inputs.component.css']
+})
+export class AddInputsComponent implements OnInit {
+
+  myform: FormGroup;
+  msg: any = "";
+
+  constructor() {
+    this.myform = new FormGroup({
+      firstname: new FormControl("", [Validators.required, Validators.minLength(5), Validators.maxLength(15), Validators.pattern("^[a-zA-Z]*$")]),
+      skills: new FormArray([
+	new FormControl('')
+             ])
+    });
+  }
+
+  addSkill(){
+    (<FormArray>this.myform.get('skills')).push(new FormControl(''));
+  }
+
+  deleteSkill(index){
+    (<FormArray>this.myform.get('skills')).removeAt(index);
+  }
+
+  submit() {
+    if (this.myform.valid) {
+      this.msg = "FirstName: " + this.myform.controls.firstname.value
+    } else {
+      this.msg = "Invalid"
+    }
+  }
+  ngOnInit() {
+  }
+
+}
+
+
+
+add-inputs.component.html
+============================
+
+<form [formGroup]="myform">
+    First Name:
+    <input type="text" formControlName="firstname">
+    
+    <fieldset>
+        <legend>skills | <span class="glyphicon glyphicon-plus" (click)="addSkill()"></span></legend>
+        <!-- <div formArrayName="skills"> -->
+        <div class="input-group" *ngFor="let skillControl of myform.get('skills').controls; let i= index">
+            <input type="text" class="form-control" [formControlName]="i" placeholder="skills" name="skills">
+            <span class="input-group-addon glyphicon glyphicon-trash" (click)="deleteSkill(i)"></span>
+        </div> 
+         <!-- </div> -->
+    </fieldset>
+
+    
+    
+    
+    <input type="submit" value="submit" (click)="submit()"><br>
+
+    <div [innerHTML]="msg">
+
+    </div>
+
+
+</form>

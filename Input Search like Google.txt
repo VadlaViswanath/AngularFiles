@@ -19,13 +19,15 @@ inputSearch:string=" ";
      search(){
       this.results2=this.results1.filter((emp)=>{
         return emp.title.toLowerCase().indexOf(this.inputSearch.toLowerCase())>=0;
+	// return emp.title.toLowerCase().match(this.inputSearch.toLowerCase());
+	// return emp.title.toLowerCase().includes(this.inputSearch.toLowerCase());
       });
      }
 
 component.html
 ===================
 
- Input Search:<input #term type="text" name="search"  [(ngModel)]="inputSearch">
+ Input Search:<input type="text" name="search"  [(ngModel)]="inputSearch">
                  <input type="button" value="search" (click)="search()">   
 
 <ul>

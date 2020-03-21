@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+   
+</head>
+<body>
+    
+    <form action="action.html" method="POST" onsubmit="return validate()">
+
+        <label>Enter username</label>
+        <input type="text" name="username" placeholder="Enter User Name" id="name_1">
+
+        <input type="email" placeholder="Enter Your Email" id="mail_1">
+
+<input type="number" placeholder="Enter Your Mobile Number" id="num_1">
+
+
+        <input type="submit">
+
+
+
+    </form>
+
+
+    <script>
+    
+        function validate(){
+            var name=document.getElementById("name_1").value;
+            var mail=document.getElementById("mail_1").value;
+            var num=document.getElementById("num_1").value;
+
+            if (name === ""){
+                alert("Enter Name");
+                return false;
+            }
+
+            if (mail === ""){
+                alert("Enter Your Mail");
+                return false;
+            }
+
+            // if (mail === ""){
+            //     alert("Enter Your Mail");
+            //     return false;
+            // }
+
+            if (num === ""){
+                alert("Enter Your Mobile Number");
+                return false;
+            }
+
+            if (num.length>=1 && num.length<10 ){
+                alert("Mobile Number must enter 10 digits");
+                return false;
+            }
+
+        }
+    
+    </script>
+</body>
+</html>

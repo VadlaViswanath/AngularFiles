@@ -1,0 +1,107 @@
+radio-data.component.html
+===========================
+
+<div class="container" *ngFor="let opt of userData">
+    <form>
+        <input type="radio" [(ngModel)]="opt.flag" name="opt.name" (change)="changeData(opt)">{{opt.name}}  
+    </form>
+</div>
+
+
+<div *ngFor="let data of userDetails">
+   <h3>Gender:{{data.gender}}</h3>
+    <h3>Age:{{data.age}}</h3>
+   
+</div>
+
+
+radio-data.component.ts
+===========================
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-radio-data',
+  templateUrl: './radio-data.component.html',
+  styleUrls: ['./radio-data.component.css']
+})
+export class RadioDataComponent implements OnInit {
+
+  constructor() { }
+
+userDetails = [];
+
+
+  changeData(data){                                              
+    this.userData.forEach(i => {
+      if(i.name != data.name){
+        i.flag = false;
+      }
+    });
+    this.userDetails = data.details;
+  }
+//==================
+// changeData(data){
+//   for(let i of this.userData){
+//     if(i.name !== data.name){
+//       i.flag=false;
+//     }
+//   }
+//   this.userDetails=data.details;
+// }
+//=======================
+
+
+
+  userData=[
+    {
+      name:"visu",
+      flag:false,
+      details:[
+        {
+          gender:"male",
+          age:25
+        }
+      ]
+    },
+    // {
+    //   name:"visu",
+    //   flag:false,
+    //   details:[
+    //     {
+    //       gender:"male",
+    //       age:25
+    //     }
+    //   ]
+    // },   //second radio button with same details
+    {
+      name:"guna",
+      flag:false,
+      details:[
+        {
+          gender:"male",
+          age:16
+        }
+      ]
+
+    },
+    {
+      name:"anushka",
+      flag:false,
+      details:[
+        {
+          gender:"female",
+          age:37
+        }
+      ]
+
+    }
+
+  ];
+
+
+  ngOnInit() {
+  }
+
+}
+

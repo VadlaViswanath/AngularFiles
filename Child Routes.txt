@@ -40,6 +40,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 
 const routes: Routes = [
+{path:"",redirectTo:"/home",pathMatch:"full"},
   {path:"home",component:HomeComponent},
   {path:"",component:HomeComponent},
   {path:"about",component:AboutComponent},
@@ -47,11 +48,11 @@ const routes: Routes = [
   {path:"departments",component:DepartmentsComponent},
   {path:"departments/:id",component:DepartmentListComponent},
   {path:"products/:brandName",component:ProductsComponent},
-  {path:"electronics",component:ElectronicsComponent,children:[
+  {path:"electronics",component:ElectronicsComponent,children:[   //childRoutes
     {path:"mobiles",component:MobilesComponent},
     {path:"laptops",component:LaptopsComponent},
   ]},
-  {path:"fashion",component:FashionComponent,children:[
+  {path:"fashion",component:FashionComponent,children:[      //childRoutes
     {path:"men",component:MenComponent},
     {path:"women",component:WomenComponent},
    ]},

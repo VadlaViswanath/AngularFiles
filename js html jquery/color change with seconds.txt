@@ -1,0 +1,20 @@
+<p id="demo">visu chari</p>
+
+<script>
+setInterval(func,1000);
+
+var elem = document.getElementById('demo');
+	elem.style.color="red";
+function func(){
+if(elem.style.color=="red"){
+		elem.style.color="green";
+	} else if(elem.style.color=="green"){
+		elem.style.color="blue";
+	} else {
+    	elem.style.color="red";
+	}
+}
+
+
+
+</script>
