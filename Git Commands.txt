@@ -1,0 +1,25 @@
+git init
+git add .
+git commit -m "message"
+
+git config --global user.email "mail id"
+git config --global user.name "name"
+
+git remote add origin "clone link"
+git push -u origin master (or) git push origin master --force
+
+git pull or clone https://github.com/veliyat/angular-8-shopping-cart.git   add existing project to VS Code
+after update data
+===========
+in git bash
+------
+git add .
+git commit -m "message"
+git push -u origin master (or) git push origin master --force
+
+in visual studio
+=============
+
+options different
+
+

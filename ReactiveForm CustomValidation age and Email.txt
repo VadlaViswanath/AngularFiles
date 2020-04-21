@@ -1,0 +1,338 @@
+app/component.html
+===================
+
+<!-- <app-ang6-comp></app-ang6-comp> -->
+<!-- <app-ang62></app-ang62> -->
+<!-- <router-outlet></router-outlet> -->
+<!-- <app-dependent-select></app-dependent-select> -->
+  
+  
+  <style>
+  
+  
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 8px 0;
+    }
+  
+  
+    p {
+      margin: 0;
+    }
+  .container fluid{
+    padding:0px;
+    margin:0px;
+  }
+    .toolbar {
+      left: 0;
+     
+      right: 0;
+      height: 100px;
+  
+      align-items: center;
+      background-color: #29487d;
+      color:white;
+      font-weight: 600;
+    }
+  
+  .logo{
+  font-family: 'Times New Roman', Times, serif;
+   font-size:15px;
+   font-weight: 450;
+   text-align:left;
+  }
+    .logo-text{
+      font-size: 35px;
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-weight: 600px;
+  text-align:center;
+    }
+  .Login{
+  margin:15px 0;
+  font-family: 'Times New Roman', Times, serif;
+  font-size:15px;
+  font-weight:600px;
+  
+  }  
+  
+  .account{
+    color:#333;
+    font-weight: 600;
+    font-family: Helvetica, Arial, sans-serif;
+     padding:10px 0;
+     font-size:36px;
+     line-height: 1.31;
+     
+  }
+  .easy{
+  color: #1d2129;
+  font-weight: 500;
+    font-family: Helvetica, Arial, sans-serif;
+     padding:10px 0;
+     font-size:22px;
+  
+  }
+   input{
+     border-radius: 5px;
+     padding:3px;
+     width:100%;
+    margin:8px 5px;
+   } 
+
+/* 2nd form css */
+
+
+
+h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 8px 0;
+    }
+  
+  
+    p {
+      margin: 0;
+    }
+  .container fluid{
+    padding:0px;
+    margin:0px;
+  }
+    .toolbar {
+      left: 0;
+     
+      right: 0;
+      height: 100px;
+  
+      align-items: center;
+      background-color: #29487d;
+      color:white;
+      font-weight: 600;
+    }
+  
+  .logo{
+  font-family: 'Times New Roman', Times, serif;
+   font-size:15px;
+   font-weight: 450;
+   text-align:left;
+  }
+    .logo-text{
+      font-size: 35px;
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-weight: 600px;
+  text-align:center;
+    }
+  .Login{
+  margin:15px 0;
+  font-family: 'Times New Roman', Times, serif;
+  font-size:15px;
+  font-weight:600px;
+  
+  }  
+  
+  .account{
+    color:#333;
+    font-weight: 600;
+    font-family: Helvetica, Arial, sans-serif;
+     padding:10px 0;
+     font-size:36px;
+     line-height: 1.31;
+     
+  }
+  .easy{
+  color: #1d2129;
+  font-weight: 500;
+    font-family: Helvetica, Arial, sans-serif;
+     padding:10px 0;
+     font-size:22px;
+  
+  }
+   input{
+     border-radius: 5px;
+     padding:3px;
+     width:100%;
+    margin:8px 5px;
+   }
+
+/*  */
+  </style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="container-fluid toolbar">
+  <nav>
+    <div class=" container,logo">
+      <div class="row" style="padding:15px 0">
+      <div class="col-sm-7 logo-text ">facebook</div>
+  
+  <form [formGroup]="myform"  (ngSubmit)="SubmitDetails()">
+  
+      <div class="col-sm-2">
+        <label>Email or Phone</label>
+        <input type="text" formControlName="Name" style="width:90%;height:90%;color:black">
+    <span *ngIf="myform.controls.Name.invalid && myform.controls.Name.touched"> Enter Name</span>
+     
+      </div>
+  
+      <div class="col-md-2">
+        <label for="password" >Password</label>
+         <input type="password"  formControlName="Password" style="width:90%;height:90%;color:black">  
+    <span *ngIf="myform.controls.Password.invalid && myform.controls.Password.touched"> Password</span>
+    
+     <a href="#"><u>forgotton Password</u></a>
+  
+      </div>
+      <div class="col-md-1">
+       
+          <button  type="submit" class="btn btn-primary Login">Log In</button>
+       
+      </div>
+      </form>
+    </div>
+  </div>
+  </nav>
+  </div>
+  
+  <!--body-->
+  <div class="container-fluid" style="background-color:#f2f3f8"> 
+    <div class="row">
+      <div class="col-md-7" style="padding:0px">
+       <img src="assets/myIMG/fbimg.png" style="width:100%;height:10    0%">
+      </div>
+      <div class="col-md-5">
+     
+       <h2 class="account">Create an account</h2>
+       <h2 class="easy">It's quick and easy.</h2>
+       
+       <div>
+         <form [formGroup]="create">
+     <div class="row">
+       <div class="col-md-5">
+         <input type="text" id="FirstName"  formControlName="FirstName">
+         <p *ngIf="create.controls.FirstName.invalid && create.controls.FirstName.touched">What's your Name?</p>
+       </div>
+  
+       <div class="col-md-5">
+         <input type="text" id="LastName" formControlName="LastName">
+         <p *ngIf="create.controls.LastName.invalid && create.controls.LastName.touched">SurName?</p>
+       </div>
+     </div>
+  
+  
+     <!--email-->
+  <div class="row">
+    <div class="col-md-10">
+      <input type="email" id="Email" formControlName="email">
+      <span *ngIf="create.get('email').touched && create.get('email').invalid">Email is Required</span> <br>
+      <span *ngIf="create.get('email').touched && create.get('email').invalid && create.get('email').errors.emailDomain">Email Domain should be yahoo.com</span>
+  
+      <input type="text" id="range" formControlName="range">
+      <span  *ngIf="create.get('range').invalid && create.get('range').touched"> Valid Password</span>
+     
+    </div>
+  </div>
+</form>
+
+
+
+       </div>
+   
+  
+      </div>
+    </div>
+  </div>
+  
+
+
+app.componrnt.ts
+=================
+
+// import { Component } from '@angular/core';
+
+// @Component({
+//   selector: 'app-root',
+//   templateUrl: './app.component.html',
+//   styleUrls: ['./app.component.css']
+// })
+// export class AppComponent {
+//   title = 'Angular622';
+// }
+
+
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators}from '@angular/forms';
+// import { Agerange } from './agerange';
+import { AbstractControl } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'facebook';
+
+
+  myform = new FormGroup({
+    Name: new FormControl("", [Validators.required]),
+    Password: new FormControl("",[Validators.required]),
+  
+  });
+
+ create= new FormGroup({
+  FirstName:new FormControl("",[Validators.required]),
+  LastName:new FormControl("",[Validators.required]),
+  email:new FormControl("",[Validators.required, emailDomain]),
+  Passwords:new FormControl("",[Validators.required]),
+  range : new FormControl("",[Agerange])
+ })
+
+
+
+SubmitDetails(){
+ console.log(this.myform.value);
+ if(this.myform.invalid){
+   return false;
+ }
+}
+
+
+
+
+
+}
+
+
+ function Agerange(control: AbstractControl) {
+    if(control.value >= 20 && control.value <= 30){
+        return null;
+    }
+    else
+    {
+        return {range:true}
+    }
+
+}
+
+
+function emailDomain(control: AbstractControl): { [key:string]: any} | null {
+  const email:string = control.value;
+  const domain = email.substring(email.lastIndexOf( '@' ) + 1);
+  if(email === '' || domain.toLowerCase() === "yahoo.com"){
+      return null;
+  } else {
+    return {emailDomain:true};
+  }
+}

@@ -1,0 +1,89 @@
+componen.html
+=================
+
+
+
+	Template driven form
+================================
+<form myForm2="ngForm">
+  <input type="text" [(ngModel)]="name" name="name">
+
+<input type="radio" required [(ngModel)]="check" #checkValue="ngModel" value="birth"  name="dob">Date of Birth
+<input type="radio" required [(ngModel)]="check" #checkValue="ngModel" value="phone"  name="dob">Mobile Number
+<h4>checkbox value:{{checkValue.value}}</h4>
+
+
+<input type="date"  name="birth3" [(ngModel)]="birth3" [required]="checkValue.value=='birth'" #birth2="ngModel">
+<span class="error" *ngIf="birth2.touched && birth2.errors?.required" >
+  Date of birth is required
+</span>
+
+<input type="number"  name="mobile" [(ngModel)]="mobile" [required]="checkValue.value=='phone'" #mobile2="ngModel">
+<span class="error" *ngIf="mobile2.touched && mobile2.errors?.required" >
+Mobile Number is required
+</span>
+</form>
+
+
+
+		reactive Form
+==================================
+
+  <form [formGroup]="myForm2">
+  <input type="text" formControlName="name">
+
+<input type="radio" formControlName="checkValue" required value="birth"> Date of birth
+<input type="radio" formControlName="checkValue" required value="phone"> Mobile Number
+<h4>checkbox value:{{this.myForm2.controls.checkValue.value}}</h4>
+<input type="date" formControlName="dob" [required]="myForm2.controls.checkValue.value=='birth'" >
+
+ <span class="error" *ngIf="myForm2.controls.dob.touched && myForm2.controls.dob.errors?.required">Date of Birth is required</span>
+
+ <input type="number" formControlName="mobile" [required]="myForm2.controls.checkValue.value=='phone'" >
+
+ <span class="error" *ngIf="myForm2.controls.mobile.touched && myForm2.controls.mobile.errors?.required">Mobile Number is required</span>
+
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+component.ts
+=======================
+
+
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.css' ]
+})
+export class AppComponent  {
+  myForm2= new FormGroup({
+    name:new FormControl(),
+    checkValue:new FormControl(),
+    dob:new FormControl(),
+    mobile:new FormControl()
+  })
+}
+
+
+component.css
+=================
+.error {
+  color: red;
+}

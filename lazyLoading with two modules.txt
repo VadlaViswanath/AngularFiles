@@ -1,0 +1,118 @@
+ng g module appRouting        when app-routing.module.ts file is not there
+
+ng g module inPatient
+ng g c inPatient/ipService
+
+ng g module outPatient
+ng g c outPatient/consultant
+
+
+app-routing.module.ts
+======================
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+
+
+export const approutes:Routes=[
+      {path:"ip",loadChildren:'../in-patient/in-patient.module#InPatientModule'},
+      {path:"op",loadChildren:'../out-patient/out-patient.module#OutPatientModule'}
+  ]
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(approutes)
+  ],
+  exports:[RouterModule]
+})
+export class AppRoutingModule { }
+
+app.module.ts
+==================
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+
+import { AppRoutingModule } from './app-routing/app-routing.module';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+
+in-patient.module.ts
+===================
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IpServiceComponent } from '../inPatient/ip-service/ip-service.component';
+import { Routes, RouterModule } from '@angular/router';
+
+ export const appRotes:Routes=[
+      {path:'',component:IpServiceComponent}
+    ]
+    
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule.forChild(appRotes)
+  ],
+  declarations: [IpServiceComponent],
+  exports:[IpServiceComponent]
+})
+export class InPatientModule { }
+
+out-patient.module.ts
+===================
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ConsultantComponent } from '../outPatient/consultant/consultant.component';
+import { Routes, RouterModule } from '@angular/router';
+
+ export const appRotes:Routes=[
+      {path:'',component:ConsultantComponent}
+    ]
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule.forChild(appRotes)
+  ],
+  declarations: [ConsultantComponent],
+  exports:[ConsultantComponent]
+})
+export class OutPatientModule { }
+
+
+app.component.html
+=====================
+
+ <a routerLink="/ip" class="btn btn-primary">In Patient</a>
+  <a routerLink="/op" class="btn btn-warning">Out Patient</a>
+
+  
+  <!-- <div class="container">
+    <ul class="nav nav-pills">
+       <li><a routerLink="/ip">In PAtient</a></li>
+       <li><a routerLink="/op">Out Patient</a></li>
+       
+     </ul>
+   </div> -->
+   
+   <router-outlet></router-outlet>
+

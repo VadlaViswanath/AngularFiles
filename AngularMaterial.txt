@@ -1,0 +1,67 @@
+npm install --save @angular/material @angular/cdk @angular.animations
+
+ng g c employees
+ng g c employees/employee
+ng g s shared/employee
+ng g m material
+
+
+when cdk nad material happened 
+=============================
+
+Angular CLI: 6.1.3
+Node: 8.11.3
+OS: win32 x64
+Angular: 9.1.2
+... animations, common, compiler, compiler-cli, core, forms
+... language-service, platform-browser, platform-browser-dynamic
+... router
+
+
+
+npm uninstall @angular/material
+npm uninstall @angular/cdk
+npm install @angular/material@7.2.0
+npm install @angular/cdk@7.2.0
+
+npm install --save hammerjs
+npm i --s lodash
+
+firebase
+=========
+npm install --save firebase angularfire2
+
+error happened
+================
+npm uninstall angularfire2
+npm install angularfire2@5.0.0-rc.9
+
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/7.14.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="/__/firebase/7.14.0/firebase-analytics.js"></script>
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+
+//==================
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDykx-8dsHyw3oB-anP7m_Kw0BlfU7SRLo",
+  authDomain: "amcrud-7c30a.firebaseapp.com",
+  databaseURL: "https://amcrud-7c30a.firebaseio.com",
+  projectId: "amcrud-7c30a",
+  storageBucket: "amcrud-7c30a.appspot.com",
+  messagingSenderId: "836736130948",
+  appId: "1:836736130948:web:18bf3a71577e8e6d59c7d1",
+  measurementId: "G-QW6HF1MNZK"
+};
+
+//==================
+"angularfire2": "^5.4.2",
+    "core-js": "^2.5.4",
+    "firebase": "^7.14.0",
