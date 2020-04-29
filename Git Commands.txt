@@ -20,6 +20,8 @@ git push -u origin master (or) git push origin master --force
 in visual studio
 =============
 
+git config --get remote.origin.url  display repository
+
 options different
 
 
