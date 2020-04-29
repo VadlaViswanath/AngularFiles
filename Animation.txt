@@ -92,7 +92,7 @@ component.html
 <p id="bp">Angular Animations</p>
 
 <!-- ============ -->
-
+<h2>visu</h2>
 <button id="animate">Animate</button>
 <p id="jq">JQuery Manipulations</p>
 
