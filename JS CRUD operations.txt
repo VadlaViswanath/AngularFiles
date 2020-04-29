@@ -20,6 +20,7 @@
     <body>
         
         <div class="container">
+        <h1>visu</h1>
             <div class="tab tab-1">
                 <table id="table" border="1">
                     <tr>
