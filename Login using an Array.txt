@@ -109,9 +109,9 @@ component.html
 ======================
 
 <p>login works!</p>
+<h1>visuchari</h1>
 
 
-<h2>visuchari</h2>
 
 <table border="1">
 <tr>
